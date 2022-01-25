@@ -1,0 +1,14 @@
+{
+  "folders": [
+	{
+		"path": "..\\..\\.."
+	},
+	{
+		"path": "..\\..\\..\\..\\VueStudy\\vue_shop_api_server"
+	}
+],
+  "settings": {
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true
+  }
+}

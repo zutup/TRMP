@@ -27,7 +27,7 @@
       plain
       style="text-align:center; position: absolute; top:95%;font-size:20px;"
     >
-      <el-popover
+      <!-- <el-popover
         placement="top-start"
         title="中原工学院"
         width="300"
@@ -39,9 +39,10 @@
           slot="reference"
           >关于我们</el-button
         >
-      </el-popover>
+      </el-popover> -->
     </div>
   </div>
+  
 </template>
 
 <script>

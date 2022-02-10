@@ -5,7 +5,7 @@
       <el-breadcrumb-item>文件</el-breadcrumb-item>
       <el-breadcrumb-item>我的</el-breadcrumb-item>
     </el-breadcrumb>
-    <br>
+    <br />
     <el-carousel :interval="5000" type="card" height="420px">
       <el-carousel-item v-for="item in imgList" :key="item.name">
         <a href="https://github.com/zutup/TRMP">
@@ -18,15 +18,18 @@
         </a>
       </el-carousel-item>
     </el-carousel>
-    <el-card>
-      <el-empty :image-size="200"></el-empty>
+    <el-card class="mycard">
+      <div>
+        <img class="emptyimg" src="../assets/css/images/empty.jpg" alt="" />
+        <p class="null">暂无数据</p>
+      </div>
     </el-card>
   </div>
 </template>
 
 <script>
 export default {
-    data() {
+  data() {
     return {
       imgList: [
         {
@@ -47,14 +50,17 @@ export default {
           src: require("@/assets/css/images/welcome.gif"),
         },
       ],
-    }
-    }
-}
+    };
+  },
+};
 </script>
 
 <style lang="less" scoped>
-.el-card{
+.mycard {
   box-shadow: 0 1px rgba(0, 0, 0, 0.15) !important;
+  border-radius: 1%;
+  text-align: center;
+  vertical-align: middle;
 }
 .el-carousel__item h3 {
   color: #475669;
@@ -63,8 +69,15 @@ export default {
   line-height: 450px;
   margin: 10%;
 }
-.image{
-  border-radius: 15px;
+.image {
+  border-radius: 3%;
+}
+.null {
+  text-align: center;
+}
+.emptyimg {
+  vertical-align: middle;
+  height: 300px;
 }
 .el-carousel__item:nth-child(2n) {
   background-color: #eaedf1;

@@ -2,16 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 import Login from "../components/login.vue";
 import Home from "../components/Home.vue";
-import Welcome from "../components/Welcome.vue";
-import person from "../components/workbench/person.vue";
-import history from "../components/workbench/history.vue";
-import center from "../components/center.vue";
-import analysis from "../components/workbench/analysis.vue";
 import message from "../components/message.vue";
-import repository from "../components/repository.vue";
-import install from "../components/install.vue";
-import cnvd from "../components/cnvd.vue";
-import url from "../components/url.vue";
 import system from "../components/system.vue";
 import register from "../components/register.vue";
 import console from "../components/console.vue";
@@ -27,15 +18,11 @@ const router = new Router({
   routes: [
     {
       path: "/",
-      redirect: "/welcome"
+      redirect: "/home"
     },
     {
       path: "/login",
       component: Login
-    },
-    {
-      path: "/home",
-      component: Home
     },
     {
       path: "/system",
@@ -44,30 +31,11 @@ const router = new Router({
       children: [
         { path: '/message', component: message },
         { path: '/mine', component: mine },
-        { path: '/cnvd', component: cnvd },
       ]
     },
     {
       path: "/home",
       component: Home,
-      redirect: '/welcome',
-      children: [
-        { path: '/welcome', component: Welcome },
-        { path: '/workbench/person', component: person },
-        { path: '/workbench/history', component: history },
-        { path: '/workbench/analysis', component: analysis },
-        { path: '/repository', component: repository },
-        { path: '/install', component: install },
-        { path: '/cnvd', component: cnvd },
-      ]
-    },
-    {
-      path: "/center",
-      component: center
-    },
-    {
-      path: "/url",
-      component: url
     },
     {
       path: "/management/accountManage",
@@ -83,7 +51,7 @@ const router = new Router({
     },
     {
       path: "/register",
-      component: register
+      component: register,
     },
     {
       path: '/console',

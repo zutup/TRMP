@@ -12,6 +12,7 @@
         placeholder="搜索文件"
         @select="handleSelect"
         style="position:absolute;right:10%"
+        clearable
       >
         <el-button slot="append" icon="el-icon-search"></el-button>
       </el-autocomplete>
@@ -28,7 +29,7 @@
           :router="true"
           :default-active="activePath"
           :default-openeds="['1', '3']"
-          background-color="#eff2f5"
+          background-color="#f7f7f7"
         >
           <!-- 一级菜单 -->
           <el-submenu index="1">
@@ -157,10 +158,10 @@ export default {
   }
 }
 .el-aside {
-  background-color: #eff2f5;
+  background-color: #f7f7f7;
 }
 .el-main {
-  background-color: #eaedf1;
+  background-color: #f7f7f7;
   // box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)
 }
 .iconfont {

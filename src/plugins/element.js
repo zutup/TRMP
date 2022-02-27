@@ -47,6 +47,7 @@ import
 
 
 Vue.prototype.$confirm = MessageBox.confirm
+Vue.prototype.$prompt = MessageBox.prompt
 
 Vue.use(Button)
 Vue.use(Progress)

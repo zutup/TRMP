@@ -5,6 +5,7 @@ import Echarts from 'vue-echarts'
 import splitPane from 'vue-splitpane'
 import 'echarts/lib/chart/line'
 import VueCompositionAPI from '@vue/composition-api'
+
 Vue.use(VueCompositionAPI)
 Vue.component('chart',Echarts)
 Vue.component('split-pane', splitPane);
@@ -16,7 +17,7 @@ import './assets/css/globalCss.css'
 //将全局的echarts对象挂载到Vue的原型对象上
 // Vue.prototype.$echarts = window.echarts
 import axios from 'axios'
-
+Vue.config.silent = true
 Vue.prototype.$http = axios
 //配置请求的根路径
 axios.defaults.baseURL = 'http://49.234.13.136:8081'

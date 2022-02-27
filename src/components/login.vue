@@ -8,7 +8,7 @@
           alt=""
           style=" width: 65px;height: 65px"
         />
-        <a>教学资源管理平台</a></div
+        <p>教学资源管理平台</p></div
       ></el-col>
     </el-row>
     <router-view></router-view>
@@ -47,6 +47,7 @@
           <el-button type="info" @click="resetLoginForm" round>重置</el-button>
         </el-form-item>
       </el-form>
+      <a href="http://localhost:8080/#/home" class="goRegister">没有账号?立即注册</a>
     </div>
   </div>
 </template>
@@ -149,6 +150,11 @@ export default {
   transform: translate(-50%, -50%);
   opacity: 0.9;
 }
+.goRegister{
+  position: absolute;
+  margin-top:250px;
+  margin-left: 30px;
+}
 .login_form {
   position: absolute;
   bottom: 0;
@@ -169,7 +175,7 @@ export default {
     display: flex;
     align-items: center;
   }
-  a {
+  p {
     margin-left: 20px;
     font-size: 20px;
   }

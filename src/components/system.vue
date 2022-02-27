@@ -95,7 +95,7 @@ export default {
   },
   methods: {
     logout() {
-      this.$router.push("/welcome");
+      this.$router.push("/home");
     },
     loadAll() {
       return [

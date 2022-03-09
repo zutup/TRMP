@@ -43,6 +43,7 @@ import
     Autocomplete,
     Progress,
     Tooltip,
+    Backtop,
 } from 'element-ui'
 
 
@@ -50,6 +51,7 @@ Vue.prototype.$confirm = MessageBox.confirm
 Vue.prototype.$prompt = MessageBox.prompt
 
 Vue.use(Button)
+Vue.use(Backtop)
 Vue.use(Progress)
 Vue.use(Tooltip)
 Vue.use(Autocomplete)

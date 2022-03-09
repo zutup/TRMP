@@ -26,53 +26,65 @@
           :unique-opened="true"
           :collapse="isCollapse"
           :collapse-transition="false"
-          :router="true"
-          :default-active="activePath"
-          :default-openeds="['1', '3']"
+          router
+          :default-active="$router.path"
+          :default-openeds="['system', 'datacharts']"
           background-color="#f7f7f7"
         >
           <!-- 一级菜单 -->
-          <el-submenu index="1">
+          <el-submenu index="system">
             <!-- 图标、文本 -->
             <template slot="title"><i class="el-icon-folder"></i>文件</template>
             <!-- 二级菜单 -->
-            <el-menu-item index="mine">
+            <el-menu-item index="/system/file/mine">
               <template slot="title"
                 ><i class="el-icon-s-cooperation"></i>我的</template
               >
             </el-menu-item>
-            <el-menu-item index="1-3">
+            <el-menu-item index="/system/file/ownFile">
               <template slot="title"
                 ><i class="el-icon-s-custom"></i>个人文件</template
               >
             </el-menu-item>
-            <el-menu-item index="1-4">
+            <el-menu-item index="/system/file/cooperate">
               <template slot="title"
                 ><i class="el-icon-connection"></i>与我协作</template
               >
             </el-menu-item>
-            <el-menu-item index="1-4">
+            <el-menu-item index="/system/file/recent">
               <template slot="title"
                 ><i class="el-icon-time"></i>最近使用</template
               >
             </el-menu-item>
-            <el-menu-item index="1-5">
+            <el-menu-item index="/system/file/usual">
               <template slot="title"
                 ><i class="el-icon-star-on"></i>常用文件</template
               >
             </el-menu-item>
-            <el-menu-item index="1-6">
+            <el-menu-item index="/system/file/recycleBin">
               <template slot="title"
                 ><i class="el-icon-delete-solid"></i>回收站</template
               >
             </el-menu-item>
           </el-submenu>
-          <el-menu-item index="message"
+          <el-menu-item index="/system/message"
             ><i class="el-icon-message"></i>消息</el-menu-item
           >
-          <el-menu-item index="console"
+          <el-menu-item index="/console"
             ><i class="el-icon-s-tools"></i>控制台</el-menu-item
           >
+          <el-submenu index="datacharts">
+            <template slot="title"><i class="el-icon-s-data"></i>数据报表</template>
+            <el-menu-item index="/system/datacharts/resourceChart" router
+            ><i class="iconfont icon-ziyuan"></i>资源访问</el-menu-item
+          >
+          <el-menu-item index="/system/datacharts/storageChart" router
+            ><i class="iconfont icon-yuncunchu"></i>存储使用</el-menu-item
+          >
+          <el-menu-item index="/system/datacharts/stuchart" router
+            ><i class="iconfont icon-xuexi"></i>学习情况</el-menu-item
+          >
+          </el-submenu>
         </el-menu>
       </el-aside>
       <!-- 右侧内容主题 -->

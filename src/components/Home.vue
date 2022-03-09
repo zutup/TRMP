@@ -76,21 +76,23 @@
         <router-view></router-view>
       </transition>
       <div class="welcome" id="home">
+        <img src="../assets/css/images/welimg.png" alt="" />
         <p
           type="text"
           plain
-          style="text-align:center; position: absolute;top:30%;left:30%;font-size:50px;background-color:transparent;color:333333;"
+          class="welcomeText"
+          style="text-align:center; position: absolute;top:30%;left:25%;font-size:50px;background-color:transparent;color:333333;"
         >
-          WELCOME<br /><br />欢 迎 使 用 教 学 资 源 管 理 平 台
+          <br /><br />Teaching resource management platform
         </p>
 
         <el-button
-          type="success"
-          round
-          @click="dialogFormVisible = true"
+          type="primary"
+          @click="login"
           plain
-          style="text-align:center; position: absolute; top:70%;left:47%;font-size:30px;"
-          >开 始</el-button
+          style="text-align:center; position: absolute; top:65%;left:45%;font-size:30px;border-radius: 6px;-moz-opacity:0.3;
+    opacity:0.6;"
+          >登 录 Login</el-button
         >
       </div>
       <div id="sharing" title="存储共享">
@@ -165,7 +167,10 @@
           </h5>
           <img src="../assets/css/images/video.png" alt="" />
         </el-container>
-        <el-image :src="require('../assets/css/images/chart.png')"></el-image>
+        <el-image
+          :src="require('../assets/css/images/chart.png')"
+          lazy
+        ></el-image>
         <el-container class="righttext">
           <h4>
             <small>图表多样化</small><br />
@@ -198,29 +203,6 @@
         >
       </div>
       <el-dialog title="用户注册" :visible.sync="dialogFormVisible" center>
-        <!-- <el-form> -->
-        <!-- 用户名 -->
-        <!-- <el-form-item prop="username">
-            <el-input
-              v-model="registerForm.username"
-              prefix-icon="el-icon-user"
-            ></el-input>
-          </el-form-item>
-          <br /><br /> -->
-        <!-- 密码 -->
-        <!-- <el-form-item prop="password">
-            <el-input
-              v-model="registerForm.password"
-              prefix-icon="iconfont icon-3702mima"
-              type="password"
-            ></el-input>
-          </el-form-item>
-        </el-form>
-        <div slot="footer" class="dialog-footer">
-          <el-button @click="dialogFormVisible = false">取 消</el-button>
-          <el-button type="primary" @click="register">确 定</el-button>
-        </div>
-        <a href="http://localhost:8080/#/login">已有账号?立即登录</a> -->
         <el-row type="flex" justify="center">
           <el-form
             ref="formData"
@@ -270,6 +252,7 @@
           </el-form>
         </el-row>
       </el-dialog>
+      <el-backtop class="backtop">UP</el-backtop>
     </el-main>
   </div>
 </template>
@@ -499,6 +482,10 @@ export default {
   margin-left: 80px;
   margin-top: 50px;
 }
+.backtop {
+  width: 45px !important;
+  height: 45px !important;
+}
 .el-image {
   float: left;
   height: 420px;
@@ -515,7 +502,30 @@ export default {
   background: url("../assets/css/images/07.png") center center no-repeat;
   background-size: 100% 100%;
   background-color: #e8eef5;
+
+  img {
+    float: right;
+    width: 730px;
+    height: 360px;
+    position: absolute;
+    top: 15%;
+    left: 30%;
+    font-size: 50px;
+  }
 }
+.welcomeText {
+  font-weight: lighter !important;
+  font-style: italic !important;
+  background: linear-gradient(to right, #ddd, rgb(130, 153, 133));
+  -webkit-background-clip: text;
+  color: transparent;
+}
+//文字渐变显示
+// .welcomeText {
+//   background: linear-gradient(to right, #ddd, black);
+//   -webkit-background-clip: text;
+//   color: transparent;
+// }
 .footer {
   width: 1903px !important;
   height: 180px !important;
@@ -533,4 +543,10 @@ export default {
     background: #222324;
   }
 }
+// .scrollbar {
+//   scrollbar-face-color: #0099dd;
+//   /*滚动条整体颜色*/
+//   scrollbar-highlight-color: #0099dd;
+//   scrollbar-arrow-color: rgb(226, 209, 209);
+// }
 </style>

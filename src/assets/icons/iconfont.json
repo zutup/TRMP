@@ -1,0 +1,30 @@
+{
+  "id": "3224227",
+  "name": "教学资源管理系统",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "883999",
+      "name": "资源",
+      "font_class": "ziyuan",
+      "unicode": "e628",
+      "unicode_decimal": 58920
+    },
+    {
+      "icon_id": "3522444",
+      "name": "学习",
+      "font_class": "xuexi",
+      "unicode": "e607",
+      "unicode_decimal": 58887
+    },
+    {
+      "icon_id": "6965109",
+      "name": "云存储",
+      "font_class": "yuncunchu",
+      "unicode": "e61c",
+      "unicode_decimal": 58908
+    }
+  ]
+}

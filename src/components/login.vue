@@ -98,7 +98,7 @@ export default {
     //         type: 'success'
     //       });
     //       window.sessionStorage.setItem("token","res.token");
-    //       this.$router.push("/welcome");
+    //       this.$router.push("/home");
     //     }else{
     //       this.$message({
     //         message: '登陆失败！',

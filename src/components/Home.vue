@@ -81,9 +81,9 @@
           type="text"
           plain
           class="welcomeText"
-          style="text-align:center; position: absolute;top:30%;left:25%;font-size:50px;background-color:transparent;color:333333;"
+          style="text-align:center; position: absolute;top:30%;left:23%;font-size:50px;background-color:transparent;color:333333;"
         >
-          <br /><br />Teaching resource management platform
+        Teaching resource management platform 
         </p>
 
         <el-button
@@ -91,7 +91,7 @@
           @click="login"
           plain
           style="text-align:center; position: absolute; top:65%;left:45%;font-size:30px;border-radius: 6px;-moz-opacity:0.3;
-    opacity:0.6;"
+    opacity:0.6; margin-top:4%"
           >登 录 Login</el-button
         >
       </div>
@@ -258,6 +258,14 @@
 </template>
 
 <script>
+//网站访问量统计
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?c06aacd8e1615fc1b57d838d1e946c23";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
 export default {
   data() {
     var validatePass = (rule, value, callback) => {
@@ -443,6 +451,7 @@ export default {
     float: left;
     font-size: 45px;
     color: #5146f3;
+    margin-top: 55px;
   }
   h5 {
     font-weight: normal;
@@ -465,6 +474,7 @@ export default {
     font-size: 18px;
     text-align: left;
     font-weight: normal;
+    margin-top: 10%;
   }
   b {
     float: right;
@@ -519,6 +529,7 @@ export default {
   background: linear-gradient(to right, #ddd, rgb(130, 153, 133));
   -webkit-background-clip: text;
   color: transparent;
+  margin-bottom: 250% !important;
 }
 //文字渐变显示
 // .welcomeText {

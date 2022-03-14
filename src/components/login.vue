@@ -118,7 +118,7 @@ export default {
 <style lang="less" scoped>
 .login_container {
   height: 100%;
-  background: url("../assets/css/images/wallpaper1.png");
+  background: url("../assets/css/images/wel.png");
 }
 .avater_box {
   height: 80px;
@@ -148,7 +148,7 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  opacity: 0.9;
+  opacity: 0.8;
 }
 .goRegister{
   position: absolute;

@@ -1,22 +1,24 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router/index.js'
-// import * as echarts from 'echarts'
-// import Echarts from 'echarts'
+import VueKonva from 'vue-konva'
 import splitPane from 'vue-splitpane'
-// import 'echarts/lib/chart/line'  
 import './assets/icons/iconfont.css';
 import './plugins/element.js'
 //导入字体图标
 import './assets/fonts/iconfont.css'
-// Vue.component('chart',echarts)
 Vue.component('split-pane', splitPane);
 
 //导入全局样式表  
 import './assets/css/globalCss.css'
+import wlExplorer from "wl-explorer";
+import "wl-explorer/lib/wl-explorer.css"
+Vue.use(wlExplorer);
+Vue.use(VueKonva)
 //将全局的echarts对象挂载到Vue的原型对象上
-// Vue.prototype.$echarts = window.echarts
+Vue.prototype.$echarts = window.echarts
 import axios from 'axios'
+import store from './store'
 Vue.config.silent = true
 Vue.prototype.$http = axios
 //配置请求的根路径
@@ -35,5 +37,6 @@ Vue.config.productionTip = false
 
 new Vue({
   router,
+  store,
   render: h => h(App)
 }).$mount('#app')

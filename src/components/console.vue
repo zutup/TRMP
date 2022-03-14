@@ -7,9 +7,12 @@
         <img src="../assets/css/images/logo2.png" alt="" />
         <span>教学资源管理系统&nbsp;&nbsp;<small>控制台</small></span>
       </div>
-      <el-button type="primary" round plain @click="logoutPtf"
+      <el-button class="button" type="primary" round plain @click="logoutPtf"
         >退出控制台</el-button
       >
+      <el-avatar
+        src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+      ></el-avatar>
     </el-header>
     <el-container>
       <el-aside width="250px">
@@ -20,11 +23,11 @@
           content="已有成员账号数"
           placement="right"
         >
-        <el-progress
-          type="circle"
-          :percentage="15"
-          :format="format1"
-        ></el-progress>
+          <el-progress
+            type="circle"
+            :percentage="15"
+            :format="format1"
+          ></el-progress>
         </el-tooltip>
         <p><small>成员账号（共10个）</small></p>
         <el-divider></el-divider>
@@ -48,7 +51,11 @@
             :key="indexs"
             class="cardListrow1"
           >
-            <el-card shadow="hover" class="card" @click.native="gotoManagement(items.path)">
+            <el-card
+              shadow="hover"
+              class="card"
+              @click.native="gotoManagement(items.path)"
+            >
               <div>
                 <img :src="items.img" class="cardimgs" />
                 <p class="title">
@@ -81,22 +88,22 @@ export default {
           img: require("../assets/css/images/account.png"),
           title: "账号管理",
           text: "当前登录账号管理",
-          path: 'accountManage'
+          path: "accountManage",
         },
         {
           img: require("../assets/css/images/groups.png"),
           title: "群组管理",
           text: "创建群组、解散群组、群组成员管理",
-          path:"groupsManage"
+          path: "groupsManage",
         },
         {
           img: require("../assets/css/images/users.png"),
           title: "用户管理",
           text: "平台用户管理",
-          path: "userManage"
-        },
+          path: "userManage",
+        }
       ],
-      cardListrow2: [{ func: "1" }, { func: "2" }, { func: "3" }]
+      cardListrow2: [{ func: "1" }, { func: "2" }, { func: "3" }],
     };
   },
   methods: {
@@ -115,16 +122,14 @@ export default {
       fileNum = 17; //后台数据
       return fileNum + "个";
     },
-    jump(index,path){
-      
-    },
+    jump(index, path) {},
     gotoManagement(path) {
-      if(path == 'accountManage')
-      this.$router.push('/management/accountManage');
-      else if(path == 'groupsManage')
-      this.$router.push('/management/groupsManage');
-      else if(path == 'userManage')
-      this.$router.push('/management/userManage');
+      if (path == "accountManage")
+        this.$router.push("/management/accountManage");
+      else if (path == "groupsManage")
+        this.$router.push("/management/groupsManage");
+      else if (path == "userManage")
+        this.$router.push("/management/userManage");
     },
   },
 };
@@ -169,6 +174,10 @@ export default {
       font-size: 14px;
     }
   }
+}
+.button {
+  position: absolute;
+  right: 6%;
 }
 .el-aside {
   background-color: #edeff1;

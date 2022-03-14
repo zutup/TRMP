@@ -38,7 +38,7 @@
             <!-- 二级菜单 -->
             <el-menu-item index="/system/file/mine">
               <template slot="title"
-                ><i class="el-icon-s-cooperation"></i>我的</template
+                ><i class="el-icon-s-cooperation"></i>我的账户</template
               >
             </el-menu-item>
             <el-menu-item index="/system/file/ownFile">
@@ -76,13 +76,13 @@
           <el-submenu index="datacharts">
             <template slot="title"><i class="el-icon-s-data"></i>数据报表</template>
             <el-menu-item index="/system/datacharts/resourceChart" router
-            ><i class="iconfont icon-ziyuan"></i>资源访问</el-menu-item
+            ><i class="iconfont icon-ziyuan"></i>资源点击</el-menu-item
           >
           <el-menu-item index="/system/datacharts/storageChart" router
             ><i class="iconfont icon-yuncunchu"></i>存储使用</el-menu-item
           >
           <el-menu-item index="/system/datacharts/stuchart" router
-            ><i class="iconfont icon-xuexi"></i>学习情况</el-menu-item
+            ><i class="iconfont icon-xuexi"></i>站点访问</el-menu-item
           >
           </el-submenu>
         </el-menu>
@@ -116,7 +116,7 @@ export default {
         { value: "期末试题", format: "ppt" },
         { value: "教学书籍", format: "txt" },
         { value: "题库", format: "zip" },
-        { value: "教学课程表", format: "xlsx" },
+        { value: "教学课程表", format: "xslx" }
       ];
     },
     querySearchAsync(queryString, cb) {
@@ -147,6 +147,7 @@ export default {
 <style lang="less" scoped>
 .home-container {
   height: 100%;
+  overflow-x: hidden !important
 }
 .el-header {
   display: flex;

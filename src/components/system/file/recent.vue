@@ -1,126 +1,160 @@
 <template>
-  <el-container class="home_container">
-    <!-- 头部信息 -->
-    <el-aside>
-      <div>
-        <span>威胁情报分析系统</span>
-      </div>
-      <el-menu
-        :default-active="$router.path"
-        class="el-menu-demo"
-        background-color="#373d41"
-        text-color="#fff"
-        active-text-color="#409eff"
-        router
-      >
-            <template slot="title"><i class="el-icon-folder"></i>文件</template>
-            <!-- 二级菜单 -->
-            <el-menu-item index="mine">
-              <template slot="title"
-                ><i class="el-icon-s-cooperation"></i>我的</template
-              >
-            </el-menu-item>
-            <el-menu-item index="ownFile">
-              <template slot="title"
-                ><i class="el-icon-s-custom"></i>个人文件</template
-              >
-            </el-menu-item>
-        <!-- <router-link to="/workbench/person"> person </router-link> -->
-        <el-submenu index="1">
-          <template slot="title">我的工作台</template>
-          <el-menu-item index="/datacharts/resourceChart" router>个人中心</el-menu-item>
-          <el-menu-item index="/datacharts/storageChart" router
-            >提交历史</el-menu-item
-          >
-          <el-menu-item index="/datacharts/stuchart" router
-            >分析结果</el-menu-item
-          >
-        </el-submenu>
-        <el-menu-item index="install">数据流程</el-menu-item>
-        <el-menu-item index="cnvd">CNVD</el-menu-item>
-        <el-menu-item index="message">消息中心</el-menu-item>
-      </el-menu>
-      <el-menu>
-        <el-menu-item index="link"
-          ><a href="https://attack.mitre.org/" target="_blank"
-            >ATT&CK</a
-          ></el-menu-item
+  <el-container class="head-container">
+    <el-main>
+      <img
+        src="@/assets/css/images/recent.svg"
+        alt=""
+        style=" width: 45px;height: 45px;vertical-align:middle"
+      />
+      <b> 最近使用系统功能</b>
+      <el-row :gutter="0" class="row">
+        <el-col
+          :span="6"
+          v-for="(items, indexs) in cardListrow1"
+          :key="indexs"
+          class="cardListrow1"
         >
-      </el-menu>
-      <el-button type="info" @click="logout" round>退出</el-button>
-    </el-aside>
-    <el-container>
-      <!-- 主体区域 -->
-      <el-main>
-        <!-- 路由占位,切换渐变 -->
-        <transition name="fade" mode="out-in">
-          <router-view></router-view>
-        </transition>
-      </el-main>
-    </el-container>
+          <el-card
+            shadow="hover"
+            class="card"
+            @click.native="gotoManagement(items.path)"
+          >
+            <div>
+              <img :src="items.img" class="cardimgs" />
+              <p class="title">
+                <strong>{{ items.title }}</strong>
+              </p>
+              <p class="text">{{ items.text }}</p>
+            </div>
+          </el-card>
+        </el-col>
+      </el-row>
+      <!-- <el-divider></el-divider> -->
+      <el-row :gutter="0">
+        <el-col :span="6" v-for="item in cardListrow2" :key="item.func">
+          <el-card shadow="hover" class="card">
+            <p class="cardfont">{{ item.func }}</p>
+          </el-card>
+        </el-col>
+      </el-row>
+    </el-main>
   </el-container>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      cardListrow1: [
+        {
+          img: require("@/assets/css/images/my.svg"),
+          title: "我的账户",
+          path: "mine",
+        },
+        {
+          img: require("@/assets/css/images/ownFile.png"),
+          title: "个人文件",
+          path: "ownFile",
+        },
+        {
+          img: require("@/assets/css/images/cooperate.png"),
+          title: "与我协作",
+          path: "cooperate",
+        },
+        {
+          img: require("@/assets/css/images/recent.svg"),
+          title: "最近使用",
+          path: "recent",
+        },
+      ],
+      cardListrow2: [{ func: "" }, { func: "" }, { func: "" }, { func: "" }],
+    };
+  },
   methods: {
-    logout() {
-      window.sessionStorage.clear();
-      this.$router.push("/login");
+    gotoManagement(path) {
+      if (path == "mine") this.$router.push("/system/file/mine");
+      else if (path == "ownFile") this.$router.push("/system/file/ownFile");
+      else if (path == "cooperate") this.$router.push("/system/file/cooperate");
+      else if (path == "recent") this.$router.push("/system/file/recent");
     },
   },
 };
 </script>
 
 <style lang="less" scoped>
-.home_container {
+.head-container {
+  box-sizing: border-box;
+  overflow-x: hidden;
+  width: 100%;
   height: 100%;
+  margin-bottom: 5px;
+  margin:0;
+  padding: 0 10px; /* 给gutter留padding */
+}
+.cardimgs {
+  width: 64px;
+  height: 64px;
+}
+.card {
+  height: 250px;
+  border-radius: 15%;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  width: 250px;
+  opacity: 0.8;
+  background: -webkit-gradient(
+    linear,
+    0% 100%,
+    10% 0%,
+    from(#85c5eb),
+    to(#f6f6f8)
+  );
+}
+.card:hover {
+  box-shadow: 0 0 50px rgba(55, 55, 56, 0.3) !important;
+  -webkit-transform: scale(1.2);
+  transform: scale(1.2);
+  height: 260px;
+  width: 255px;
 }
 .el-header {
-  background-color: #373d41;
   display: flex;
   justify-content: space-between;
   padding-left: 0;
-  color: aliceblue;
+  background-color: #fcfcfc;
+  align-items: center;
+  color: rgb(0, 0, 0);
   font-size: 20px;
-  div {
+  > div {
     display: flex;
     align-items: center;
-  }
-  span {
-    margin-left: 10px;
+    img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+    }
+    span {
+      margin-left: 15px;
+    }
+    small {
+      font-size: 14px;
+    }
   }
 }
-
 .el-aside {
-  background-color: #333744;
+  background-color: #edeff1;
+  text-align: center;
+}
+.row {
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+.el-row {
+  left: 20px;
 }
 .el-main {
-  background-color: #eaedf1;
-}
-.el-button {
-  right: 100%;
-  color: #46485f;
-}
-.fade-enter {
-  opacity: 0;
-}
-.fade-leave {
-  opacity: 1;
-}
-.fade-leave-active,
-.fade-enter-active {
-  transition: opacity 0.3s;
-}
-.el-carousel__item h3 {
-  color: #475669;
-  font-size: 14px;
-  opacity: 0.75;
-  line-height: 200px;
-  margin: 0;
-}
-.item {
-  margin-top: 10px;
-  margin-right: 40px;
+  background-color: #f5f7f8;
+  // box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 }
 </style>

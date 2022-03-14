@@ -44,6 +44,10 @@ import
     Progress,
     Tooltip,
     Backtop,
+    Dropdown,
+    DropdownItem,
+    DropdownMenu,
+    Avatar
 } from 'element-ui'
 
 
@@ -53,6 +57,10 @@ Vue.prototype.$prompt = MessageBox.prompt
 Vue.use(Button)
 Vue.use(Backtop)
 Vue.use(Progress)
+Vue.use(Dropdown)
+Vue.use(Avatar)
+Vue.use(DropdownItem)
+Vue.use(DropdownMenu)
 Vue.use(Tooltip)
 Vue.use(Autocomplete)
 Vue.use(CheckboxGroup)

@@ -1,0 +1,58 @@
+{
+  "id": "3224227",
+  "name": "教学资源管理系统",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "2966209",
+      "name": "下拉",
+      "font_class": "xiala",
+      "unicode": "e617",
+      "unicode_decimal": 58903
+    },
+    {
+      "icon_id": "10588411",
+      "name": "下拉",
+      "font_class": "xiala1",
+      "unicode": "e648",
+      "unicode_decimal": 58952
+    },
+    {
+      "icon_id": "883999",
+      "name": "资源",
+      "font_class": "ziyuan",
+      "unicode": "e628",
+      "unicode_decimal": 58920
+    },
+    {
+      "icon_id": "3522444",
+      "name": "学习",
+      "font_class": "xuexi",
+      "unicode": "e607",
+      "unicode_decimal": 58887
+    },
+    {
+      "icon_id": "6965109",
+      "name": "云存储",
+      "font_class": "yuncunchu",
+      "unicode": "e61c",
+      "unicode_decimal": 58908
+    },
+    {
+      "icon_id": "10949395",
+      "name": "左",
+      "font_class": "zuo",
+      "unicode": "e620",
+      "unicode_decimal": 58912
+    },
+    {
+      "icon_id": "10949403",
+      "name": "右",
+      "font_class": "you",
+      "unicode": "e621",
+      "unicode_decimal": 58913
+    }
+  ]
+}

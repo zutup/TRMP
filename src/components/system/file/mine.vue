@@ -11,7 +11,7 @@
         <a href="https://github.com/zutup/TRMP">
           <img
             :src="item.src"
-            style="height:100%;width:100%;"
+            style="height: 100%; width: 100%"
             :title="item.title"
             class="image"
           />
@@ -61,6 +61,9 @@ export default {
   border-radius: 1%;
   text-align: center;
   vertical-align: middle;
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 .el-carousel__item h3 {
   color: #475669;

@@ -1,5 +1,5 @@
 <template>
-  <div id="homepage">
+  <div class="homepage" ref="homepage" style="overflow: hidden">
     <router-view />
     <!-- 头部信息 -->
     <el-header>
@@ -7,15 +7,15 @@
         <img
           src="../assets/css/images/logo2.png"
           alt=""
-          style=" width: 65px;height: 65px"
+          style="width: 45px; height: 45px"
         />
-        <span>教学资源管理平台</span>
+        <span> &nbsp;教学资源管理平台 </span>
       </div>
       <el-menu
         :default-active="home"
-        class="el-menu-demo"
+        class="el-menu"
         mode="horizontal"
-        background-color="#373d41"
+        background-color="#122e29"
         text-color="#fff"
         active-text-color="#ffd04b"
         active="#home"
@@ -64,206 +64,239 @@
           ></el-menu-item
         >
       </el-menu>
-      <el-button type="info" round @click="dialogFormVisible = true" plain
+      <!-- <el-button type="info" round @click="dialogFormVisible = true" plain size="small"
         >立即注册</el-button
-      >
-      <el-button type="primary" round @click="login" plain>登 录</el-button>
+      > -->
+      <el-button type="primary" round @click="login" plain size="mini"
+        ><i class="el-icon-user"> 登 录 / 注 册 </i>
+      </el-button>
     </el-header>
     <!-- 主体区域 -->
-    <el-main>
-      <!-- 路由占位,切换渐变 -->
-      <transition name="fade" mode="out-in">
-        <router-view></router-view>
-      </transition>
-      <div class="welcome" id="home">
-        <img src="../assets/css/images/welimg.png" alt="" />
-        <p
-          type="text"
-          plain
-          class="welcomeText"
-          style="text-align:center; position: absolute;top:30%;left:23%;font-size:50px;background-color:transparent;color:333333;"
-        >
-        Teaching resource management platform 
-        </p>
-
-        <el-button
-          type="primary"
-          @click="login"
-          plain
-          style="text-align:center; position: absolute; top:65%;left:45%;font-size:30px;border-radius: 6px;-moz-opacity:0.3;
-    opacity:0.6; margin-top:4%"
-          >登 录 Login</el-button
-        >
-      </div>
-      <div id="sharing" title="存储共享">
-        <el-container class="lefttext">
-          <h5>
-            <h1>存储共享<br /><small>文件实时同步,实现高效共享</small></h1>
-            <p>
-              无论是同步本地与云端文件，还是多人多端对同个文件<br />产生的修改版本，通过强大的文件同步能力，您和同事<br />都能及时看到一致的文件版本。
-            </p>
-          </h5>
-          <img src="../assets/css/images/share.png" alt="" />
-        </el-container>
-        <el-image
-          :src="require('../assets/css/images/permission.png')"
-        ></el-image>
-        <el-container class="righttext">
-          <h4>
-            <small>精细权限设置</small><br />
-            <p>
-              可以高效管理成员对文件的预览/编辑<br />/上传/下载/删除/分享等权限。
-            </p>
-          </h4>
-        </el-container>
-      </div>
-      <div id="search">
-        <el-container class="lefttext">
-          <h5>
-            <h1>文件查阅<br /><small>全文搜索功能</small></h1>
-            <p>
-              您可以通过多种筛选条件缩小搜索范围，即使<br />忘记文件名，您也可以通过全文搜索功能在茫<br />茫文库中快速找到目标文件。
-            </p>
-          </h5>
-          <img src="../assets/css/images/searchbox.png" alt="" />
-        </el-container>
-        <el-image :src="require('../assets/css/images/survey.png')"></el-image>
-        <el-container class="righttext">
-          <h4>
-            <small>在线预览多种文件格式</small><br />
-            <p>
-              除了常规格式的文件，您还可以在线预览专业的<br />文件格式，涵盖工程/制造、设计、项目管理和教<br />培行业。
-            </p>
-          </h4>
-        </el-container>
-      </div>
-      <div id="management">
-        <el-container class="lefttext">
-          <h5>
-            <h1>文件管理<br /><small>轻松管理相关文件</small></h1>
-            <p>
-              自由管理与自己相关的本地文件、云端文件、共享文件。<br />修改、上传、删除、共享等多种操作，都能及时看到<br />一致的文件版本。
-            </p>
-          </h5>
-          <img src="../assets/css/images/management.png" alt="" />
-        </el-container>
-        <el-image :src="require('../assets/css/images/library.png')"></el-image>
-        <el-container class="righttext">
-          <h4>
-            <small>资源库文件管理</small><br />
-            <p>
-              可以高效管理公共资源库的教学资源文件，对文件的<br />预览/编辑/上传/下载/删除/分享等权限。
-            </p>
-          </h4>
-        </el-container>
-      </div>
-      <div id="preview">
-        <el-container class="lefttext">
-          <h5>
-            <h1>数据可视化<br /><small>让数据更加直观生动</small></h1>
-            <p>
-              将平台数据用各种图标的形式表现，达到更加<br />直观高效的目的通过图形的长度、宽度、位置、<br />面积、角度、颜色等来展示数值
-            </p>
-          </h5>
-          <img src="../assets/css/images/video.png" alt="" />
-        </el-container>
-        <el-image
-          :src="require('../assets/css/images/chart.png')"
-          lazy
-        ></el-image>
-        <el-container class="righttext">
-          <h4>
-            <small>图表多样化</small><br />
-            <p>
-              利用饼图、折线图、直方图、柱状图等多种图表<br />将平台数据可视化更直观表现趋势、数量、数值<br />差异、多标准等关系
-            </p>
-          </h4>
-        </el-container>
-      </div>
-      <div id="group" class="foot">
-        <el-container class="lefttext">
-          <h5>
-            <h1>组群管理<br /><small>轻松管理相关组群</small></h1>
-            <p>
-              组群成员管理、组群部门架构管理、组织管理；<br />成员统计、空间统计、文件统计；<br />相关成员查询操作日志
-            </p>
-          </h5>
-          <img src="../assets/css/images/groupimg.png" alt="" />
-        </el-container>
-      </div>
-      <div class="footer">
-        <span>立即使用，开启简单工作</span>
-        <br /><br />
-        <el-button
-          type="warning"
-          plain
-          class="register"
-          @click="dialogFormVisible = true"
-          >立即注册</el-button
-        >
-      </div>
-      <el-dialog title="用户注册" :visible.sync="dialogFormVisible" center>
-        <el-row type="flex" justify="center">
-          <el-form
-            ref="formData"
-            :model="formData"
-            :rules="rules"
-            label-width="80px"
-            @keyup.enter.native="register()"
+    <div class="mainpage">
+      <div class="bg-blur"></div>
+      <el-main>
+        <!-- 路由占位,切换渐变 -->
+        <transition name="fade" mode="out-in">
+          <router-view></router-view>
+        </transition>
+        <div class="welcome" id="home">
+          <img src="../assets/css/images/hello.svg" alt="" />
+          <p
+            type="text"
+            plain
+            class="welcomeText"
+            style="
+              text-align: center;
+              position: absolute;
+              top: 35%;
+              left: 25%;
+              font-size: 30px;
+              background-color: transparent;
+              color: 333333;
+            "
           >
-            <el-form-item prop="userName" label="用户名"
-              ><el-input
-                v-model="formData.userName"
-                placeholder="请输入用户名"
-                prefix-icon="el-icon-user"
-                clearable
-              ></el-input
-            ></el-form-item>
-            <el-form-item prop="password" label="密码"
-              ><el-input
-                v-model="formData.password"
-                placeholder="请输入密码"
-                type="password"
-                prefix-icon="iconfont icon-3702mima"
-                clearable
-              ></el-input
-            ></el-form-item>
-            <el-form-item prop="cheackPassword" label="确认密码"
-              ><el-input
-                v-model="formData.cheackPassword"
-                placeholder="再次输入密码"
-                type="password"
-                prefix-icon="iconfont icon-3702mima"
-                clearable
-              ></el-input
-            ></el-form-item>
-            <el-form-item>
-              <el-button
-                type="primary"
-                @click="register('formData')"
-                icon="el-icon-upload"
-                >注册</el-button
-              >
-              <el-button @click="resetForm('formData')"
-                >重置</el-button
-              ></el-form-item
+            T e a c h i n g &nbsp; R e s o u r c e &nbsp; M a n a g e m e n t
+            &nbsp; P l a t f o r m
+          </p>
+
+          <el-button
+            type="primary"
+            @click="login"
+            plain
+            style="
+              text-align: center;
+              position: absolute;
+              top: 70%;
+              left: 45.5%;
+              font-size: 20px;
+              border-radius: 6px;
+              -moz-opacity: 0.3;
+              opacity: 0.6;
+            "
+            >&nbsp; 登 录 Login &nbsp;</el-button
+          >
+        </div>
+        <img
+          src="../assets/css/images/mouse.svg"
+          alt=""
+          @click="goToAnchor('#sharing')"
+          class="underscore"
+        />
+        <div id="sharing" title="存储共享">
+          <el-container class="lefttext">
+            <h5>
+              <h1>存储共享<br /><small>文件实时同步,实现高效共享</small></h1>
+              <p>
+                无论是同步本地与云端文件，还是多人多端对同个文件<br />产生的修改版本，通过强大的文件同步能力，您和同事<br />都能及时看到一致的文件版本。
+              </p>
+            </h5>
+            <img src="../assets/css/images/share.png" alt="" />
+          </el-container>
+          <el-image
+            :src="require('../assets/css/images/permission.png')"
+          ></el-image>
+          <el-container class="righttext">
+            <h4>
+              <small>精细权限设置</small><br />
+              <p>
+                可以高效管理成员对文件的预览/编辑<br />/上传/下载/删除/分享等权限。
+              </p>
+            </h4>
+          </el-container>
+        </div>
+        <div id="search">
+          <el-container class="lefttext">
+            <h5>
+              <h1>文件查阅<br /><small>全文搜索功能</small></h1>
+              <p>
+                您可以通过多种筛选条件缩小搜索范围，即使<br />忘记文件名，您也可以通过全文搜索功能在茫<br />茫文库中快速找到目标文件。
+              </p>
+            </h5>
+            <img src="../assets/css/images/searchbox.png" alt="" />
+          </el-container>
+          <el-image
+            :src="require('../assets/css/images/survey.png')"
+          ></el-image>
+          <el-container class="righttext">
+            <h4>
+              <small>在线预览多种文件格式</small><br />
+              <p>
+                除了常规格式的文件，您还可以在线预览专业的<br />文件格式，涵盖工程/制造、设计、项目管理和教<br />培行业。
+              </p>
+            </h4>
+          </el-container>
+        </div>
+        <div id="management">
+          <el-container class="lefttext">
+            <h5>
+              <h1>文件管理<br /><small>轻松管理相关文件</small></h1>
+              <p>
+                自由管理与自己相关的本地文件、云端文件、共享文件。<br />修改、上传、删除、共享等多种操作，都能及时看到<br />一致的文件版本。
+              </p>
+            </h5>
+            <img src="../assets/css/images/management.png" alt="" />
+          </el-container>
+          <el-image
+            :src="require('../assets/css/images/library.png')"
+          ></el-image>
+          <el-container class="righttext">
+            <h4>
+              <small>资源库文件管理</small><br />
+              <p>
+                可以高效管理公共资源库的教学资源文件，对文件的<br />预览/编辑/上传/下载/删除/分享等权限。
+              </p>
+            </h4>
+          </el-container>
+        </div>
+        <div id="preview">
+          <el-container class="lefttext">
+            <h5>
+              <h1>数据可视化<br /><small>让数据更加直观生动</small></h1>
+              <p>
+                将平台数据用各种图标的形式表现，达到更加<br />直观高效的目的通过图形的长度、宽度、位置、<br />面积、角度、颜色等来展示数值
+              </p>
+            </h5>
+            <img src="../assets/css/images/video.png" alt="" />
+          </el-container>
+          <el-image
+            :src="require('../assets/css/images/chart.png')"
+            lazy
+          ></el-image>
+          <el-container class="righttext">
+            <h4>
+              <small>图表多样化</small><br />
+              <p>
+                利用饼图、折线图、直方图、柱状图等多种图表<br />将平台数据可视化更直观表现趋势、数量、数值<br />差异、多标准等关系
+              </p>
+            </h4>
+          </el-container>
+        </div>
+        <div id="group" class="foot">
+          <el-container class="lefttext">
+            <h5>
+              <h1>组群管理<br /><small>轻松管理相关组群</small></h1>
+              <p>
+                组群成员管理、组群部门架构管理、组织管理；<br />成员统计、空间统计、文件统计；<br />相关成员查询操作日志
+              </p>
+            </h5>
+            <img src="../assets/css/images/groupimg.png" alt="" />
+          </el-container>
+        </div>
+        <div class="footer">
+          <span>立即使用，开启简单工作</span>
+          <br /><br />
+          <el-button
+            type="warning"
+            plain
+            size="mini"
+            class="register"
+            @click="dialogFormVisible = true"
+            >立即注册</el-button
+          >
+        </div>
+        <el-dialog title="用户注册" :visible.sync="dialogFormVisible" center>
+          <el-row type="flex" justify="center">
+            <el-form
+              ref="formData"
+              :model="formData"
+              :rules="rules"
+              label-width="80px"
+              @keyup.enter.native="register()"
             >
-            <router-link to="login">已有账户？立即登录</router-link>
-          </el-form>
-        </el-row>
-      </el-dialog>
-      <el-backtop class="backtop">UP</el-backtop>
-    </el-main>
+              <el-form-item prop="userName" label="用户名"
+                ><el-input
+                  v-model="formData.userName"
+                  placeholder="请输入用户名"
+                  prefix-icon="el-icon-user"
+                  clearable
+                ></el-input
+              ></el-form-item>
+              <el-form-item prop="password" label="密码"
+                ><el-input
+                  v-model="formData.password"
+                  placeholder="请输入密码"
+                  type="password"
+                  prefix-icon="iconfont icon-3702mima"
+                  clearable
+                ></el-input
+              ></el-form-item>
+              <el-form-item prop="cheackPassword" label="确认密码"
+                ><el-input
+                  v-model="formData.cheackPassword"
+                  placeholder="再次输入密码"
+                  type="password"
+                  prefix-icon="iconfont icon-3702mima"
+                  clearable
+                ></el-input
+              ></el-form-item>
+              <el-form-item>
+                <el-button
+                  type="primary"
+                  @click="register('formData')"
+                  icon="el-icon-upload"
+                  >注册</el-button
+                >
+                <el-button @click="resetForm('formData')"
+                  >重置</el-button
+                ></el-form-item
+              >
+              <router-link to="login">已有账户？立即登录</router-link>
+            </el-form>
+          </el-row>
+        </el-dialog>
+        <el-backtop class="backtop">UP</el-backtop>
+      </el-main>
+    </div>
   </div>
 </template>
 
 <script>
 //网站访问量统计
 var _hmt = _hmt || [];
-(function() {
+(function () {
   var hm = document.createElement("script");
   hm.src = "https://hm.baidu.com/hm.js?c06aacd8e1615fc1b57d838d1e946c23";
-  var s = document.getElementsByTagName("script")[0]; 
+  var s = document.getElementsByTagName("script")[0];
   s.parentNode.insertBefore(hm, s);
 })();
 export default {
@@ -319,7 +352,7 @@ export default {
     this.distance_join = document.querySelector("#management").offsetTop - 60;
     this.distance_preview = document.querySelector("#preview").offsetTop - 60;
     this.distance_group = document.querySelector("#group").offsetTop - 60;
-    this.$nextTick(function() {
+    this.$nextTick(function () {
       document
         .querySelector("#homepage")
         .addEventListener("scroll", this.onScroll);
@@ -329,7 +362,7 @@ export default {
   methods: {
     login() {
       window.sessionStorage.clear();
-      this.$router.push("/login");
+      this.$router.push("/loginReg");
     },
     // register() {
     //   this.$router.push("/login")
@@ -360,10 +393,9 @@ export default {
       const toElement = document.querySelector(target);
       toElement.scrollIntoView(this.scrollIntoViewOptions);
     },
+    //TODO循环报错
     onScroll() {
-      let scrolled = Math.abs(
-        document.getElementById("homepage").getBoundingClientRect().top
-      );
+      let scrolled = Math.abs(this.$refs.homepage.getBoundingClientRect().top);
       if (scrolled < this.distance_team) {
         this.active = "#home";
       } else if (
@@ -395,31 +427,45 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.mainpage {
+  background-size: 100% 100%;
+  background: url("../assets/css/images/loginImg4.png");
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 1;
+}
+// .mainpage:after{
+//     content: "";
+//     width:100%;
+//     height:100%;
+//     position: absolute;
+//     background: inherit;
+//     filter: blur(15px);
+//     z-index: 2;
+// }
 .el-header {
   display: flex;
   justify-content: space-between;
   padding-left: 0;
+  height: 45px !important;
   width: 100%;
-  background-color: #373d3f;
+  background-color: #122e29;
   align-items: center;
   color: rgb(255, 255, 255);
-  font-size: 20px;
+  font-size: 18px;
   z-index: 999; //最上层显示
   position: fixed;
-  > img {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-  }
-  span {
+  > span {
     margin-left: 25px;
   }
   a {
     display: block;
     width: 100%;
-    height: 60px;
+    height: 25px;
     text-align: center;
-    line-height: 60px;
+    line-height: 45px;
     color: #333333;
     text-decoration: none; //下划线
   }
@@ -435,8 +481,8 @@ export default {
   align-items: center;
   width: 400px;
 }
+
 .el-main {
-  background-color: #e8eef5;
   > div {
     height: 900px;
     width: 1200px;
@@ -444,13 +490,14 @@ export default {
     margin: 0 auto;
     // border-radius: 2%;
     border: none;
+    z-index: 11;
   }
   h1 {
     width: 300px;
     height: 100px;
     float: left;
     font-size: 45px;
-    color: #5146f3;
+    color: #087aaf;
     margin-top: 55px;
   }
   h5 {
@@ -471,14 +518,15 @@ export default {
   }
   p {
     float: left;
-    font-size: 18px;
+    font-size: 16px;
     text-align: left;
     font-weight: normal;
     margin-top: 10%;
+    color: #445a5c;
   }
   b {
     float: right;
-    font-size: 18px;
+    font-size: 16px;
     text-align: left;
   }
 }
@@ -487,14 +535,33 @@ export default {
   margin-right: 80px;
   margin-top: 125px;
 }
+.el-menu,
+.el-menu-item {
+  margin-right: 16%;
+  border: none !important;
+  height: 45px !important;
+  vertical-align: middle;
+}
 .lefttext {
   float: left;
   margin-left: 80px;
   margin-top: 50px;
 }
+
+.underscore {
+  width: 45px !important;
+  height: 45px !important;
+  vertical-align: middle;
+  text-align: center;
+  position: absolute;
+  bottom: 15px;
+  left: 48.5%;
+  cursor: pointer;
+}
 .backtop {
   width: 45px !important;
   height: 45px !important;
+  color: #008997 !important;
 }
 .el-image {
   float: left;
@@ -509,45 +576,34 @@ export default {
   height: 45px !important;
 }
 .welcome {
-  background: url("../assets/css/images/07.png") center center no-repeat;
-  background-size: 100% 100%;
-  background-color: #e8eef5;
-
   img {
     float: right;
-    width: 730px;
-    height: 360px;
+    width: 25%;
+    height: 25%;
     position: absolute;
-    top: 15%;
-    left: 30%;
+    top: 28%;
+    left: 38%;
     font-size: 50px;
   }
 }
 .welcomeText {
   font-weight: lighter !important;
   font-style: italic !important;
-  background: linear-gradient(to right, #ddd, rgb(130, 153, 133));
-  -webkit-background-clip: text;
-  color: transparent;
+  color: rgb(14, 48, 45) !important;
+  background-clip: text;
   margin-bottom: 250% !important;
 }
-//文字渐变显示
-// .welcomeText {
-//   background: linear-gradient(to right, #ddd, black);
-//   -webkit-background-clip: text;
-//   color: transparent;
-// }
 .footer {
-  width: 1903px !important;
-  height: 180px !important;
+  width: 100vw !important;
+  height: 100px !important;
   text-align: center;
-  background-color: #373d3f !important;
+  background-color: #122e29 !important;
   vertical-align: middle;
   display: table-cell; //垂直居中
   > span {
     color: white;
     // text-shadow: 5px 5px 5px red, 0px 0px 2px red;
-    font-size: 30px;
+    font-size: 20px;
     letter-spacing: 8px;
   }
   > .register {

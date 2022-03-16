@@ -18,6 +18,7 @@ import storageChart from "../components/system/datacharts/storageChart"
 import resourceChart from "../components/system/datacharts/resourceChart"
 import recent from "../components/system/file/recent.vue"
 import usual from "../components/system/file/usual.vue"
+import loginReg from "../components/loginReg.vue"
 
 Vue.use(Router);
 
@@ -56,6 +57,10 @@ const router = new Router({
     {
       path: "/management/accountManage",
       component: accountManage
+    },
+    {
+      path: "/loginReg",
+      component: loginReg
     },
     {
       path: "/management/userManage",

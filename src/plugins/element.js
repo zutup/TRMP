@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import showUploadFileBox from '../components/system/file/box/uploadFile/index.js'
 import 
 { 
     Button,
@@ -53,6 +54,7 @@ import
 
 Vue.prototype.$confirm = MessageBox.confirm
 Vue.prototype.$prompt = MessageBox.prompt
+Vue.prototype.$uploadFile = showUploadFileBox
 
 Vue.use(Button)
 Vue.use(Backtop)

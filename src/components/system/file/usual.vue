@@ -1,181 +1,115 @@
 <template>
-  <el-container class="home">
-    <el-card class="mycard">
-      <el-input
-        size="small"
-        style="width: 100px"
-        v-model="name"
-        placeholder="请输入姓名"
-      ></el-input>
-      <el-date-picker
-        v-model="date"
-        type="date"
-        placeholder="选择日期"
-        value-format="yyyy-MM-dd"
-      >
-      </el-date-picker>
-      <el-input
-        size="small"
-        style="width: 100px"
-        v-model="address"
-        placeholder="请输入地址"
-      ></el-input>
-      <el-button size="small" type="primary" @click="handleCurrentChange"
-        >新增</el-button
-      >
-      <el-button size="small" type="primary" @click="delRow">删除</el-button>
-      <el-table :data="tableData" style="width: 100%">
-        <el-table-column prop="date" label="日期" width="180">
-            <template slot-scope="scope">
-            <div class="timetext">
-              {{ scope.row.date }}
-            </div>
-          </template>
-        </el-table-column>
-        <el-table-column prop="name" label="姓名" width="180">
-        </el-table-column>
-        <el-table-column prop="address" label="地址"> </el-table-column>
-        <el-table-column fixed="right" label="操作" width="100">
-          <template slot-scope="scope">
-            <el-button @click="handleClick(scope.row)" type="text" size="small"
-              >查看</el-button
-            >
-            <el-button
-              type="text"
-              size="small"
-              @click="handleEdit(scope.$index, scope.row)"
-              >编辑</el-button
-            >
-            <el-button
-              @click.native.prevent="deleteRow(scope.$index, tableData)"
-              type="text"
-              size="small"
-            >
-              移除
-            </el-button>
-          </template>
-        </el-table-column>
-      </el-table>
-      <el-dialog
-        title="编辑数据"
-        :visible.sync="editFormVisible"
-        :close-on-click-modal="false"
-        class="edit-form"
-      >
-        <el-form :model="editForm" label-width="80px" ref="editForm">
-          <el-form-item label="名称" prop="Name">
-            <el-input v-model="editForm.name" auto-complete="off"></el-input>
-            <el-input v-model="editForm.date" auto-complete="off"></el-input>
-            <el-input v-model="editForm.address" auto-complete="off"></el-input>
-          </el-form-item>
-        </el-form>
-        <div slot="footer" class="dialog-footer">
-          <el-button @click.native="handleCancel('editForm')">取消</el-button>
-          <el-button type="primary" @click.native="handleUpdate('editForm')"
-            >更新</el-button
-          >
-        </div>
-      </el-dialog>
-      <br />
-    </el-card>
-  </el-container>
+    <div>
+        <el-button @click="editAll">批量编辑</el-button>
+        <el-button @click="submit">提交</el-button>
+        <el-button @click="addAll">批量增加</el-button>
+        <el-button @click="delectAll">批量删除</el-button>
+        <el-table :data="tabledatas" border @selection-change="handleSelectionChange">
+            <el-table-column type="selection"></el-table-column>
+            <el-table-column label="title">
+                <template slot-scope="scope">
+                    <span v-if="scope.row.show">
+                        <el-input size="mini" placeholder="请输入内容" v-model="scope.row.title"></el-input>
+                    </span>
+                    <span v-else>{{scope.row.title}}</span>
+                </template>
+            </el-table-column>
+            <el-table-column label="text">
+                <template slot-scope="scope">
+                    <span v-if="scope.row.show">
+                        <el-input size="mini" placeholder="请输入内容" v-model="scope.row.text"></el-input>
+                    </span>
+                    <span v-else>{{scope.row.text}}</span>
+                </template>
+            </el-table-column>
+            <el-table-column label="操作">
+                <template slot-scope="scope">
+                    <el-button @click="edit(scope.row,scope.$index)">{{scope.row.show?'保存':"修改"}}</el-button>
+                    <el-button @click="cope(scope.row,scope.$index)">单个复制</el-button>
+                    <el-button @click="delect(scope.$index)">单个删除</el-button>
+                </template>
+            </el-table-column>
+        </el-table>
+    </div>
 </template>
 <script>
-export default {
-  name: "demo",
-  data() {
-    return {
-      //编辑界面数据
-      editForm: {
-        name: "",
-        date: "",
-        address: "",
-        index: 0,
-      },
-      //定义属性
-      name: undefined,
-      date: undefined,
-      address: undefined,
-      //默认dialog弹窗不打开（true打开，false为不打开）
-      editFormVisible: false,
-      //模拟表格数据
-      tableData: [
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "郑州市普陀区金沙江路 1518 弄",
+    import Vue from 'vue'
+    export default {
+        data() {
+            return {
+                tabledatas: [],
+                multipleSelection: [],
+            }
         },
-        {
-          date: "2016-05-04",
-          name: "王大虎",
-          address: "南京市普陀区金沙江路 1517 弄",
+        created() {
+            this.tabledatas = [
+                { title: '标题1', text: 's111sssa' },
+                { title: '标题2', text: 'ss222ssa' },
+            ]
+            this.tabledatas.map(i => {
+                i.show = false
+                return i
+            })
         },
-        {
-          date: "2016-05-01",
-          name: "王虎虎",
-          address: "北京市普陀区金沙江路 1519 弄",
+        methods: {
+            edit(row, index) {
+                row.show = row.show ? false : true
+                Vue.set(this.tabledatas, index, row)
+                // 修改后保存
+            },
+            editAll() {
+                this.tabledatas.map((i, index) => {
+                    i.show = true
+                    Vue.set(this.tabledatas, index, i)
+                })
+            },
+            submit() {
+                this.tabledatas.map((i, index) => {
+                    i.show = false
+                    Vue.set(this.tabledatas, index, i)
+                })
+            },
+            // 单个复制
+            cope(val, index) {
+     			this.tabledatas.splice(index, 0,JSON.parse(JSON.stringify(val)))
+   			},  
+            // 单个删除
+            delect(index) {
+                this.tabledatas.splice(index, 1)
+            },
+            //批量新增
+            addAll() {
+                if (this.multipleSelection.length == 0) {
+                    let list = {
+                        title: "",
+                        text: ""
+                    }
+                    this.tabledatas.push(list)
+                } else {
+                     this.multipleSelection.forEach((val, index)=> {
+                   		this.tabledatas.splice(index, 0,JSON.parse(JSON.stringify(val)))
+                    });
+                }
+            },
+            //批量删除
+            delectAll() {
+                for (let i = 0; i < this.tabledatas.length; i++) {
+                    const element = this.tabledatas[i];
+                    element.id = i
+                }
+                if (this.multipleSelection.length == 0) this.$message.error('请先至少选择一项')
+                this.multipleSelection.forEach(element => {
+                    this.tabledatas.forEach((e, i) => {
+                        if (element.id == e.id) {
+                            this.tabledatas.splice(i, 1)
+                        }
+                    });
+                });
+            },
+            //选
+            handleSelectionChange(val) {
+                this.multipleSelection = val;
+            }
         },
-        {
-          date: "2016-05-03",
-          name: "王二虎",
-          address: "上海市普陀区金沙江路 1516 弄",
-        },
-      ],
-    };
-  },
-  methods: {
-    //新增数据方法
-    handleCurrentChange: function () {
-      this.tableData.push({
-        date: this.date,
-        name: this.name,
-        address: this.address,
-      });
-    },
-    //删除最后一行数据
-    delRow(index, row) {
-      this.tableData.splice(this.tableData.indexOf(row), 1);
-    },
-    //删除当前行数据
-    deleteRow(index, rows) {
-      rows.splice(index, 1);
-    },
-    //编辑
-    handleEdit: function (index, row) {
-      this.editFormVisible = true; //dialog对话窗口打开
-      this.editForm = Object.assign({}, row); //将数据传入dialog页面
-      this.editForm.index = index; //传递当前index
-    },
-    //取消
-    handleCancel(formName) {
-      this.editFormVisible = false;
-    },
-    //更新
-    handleUpdate(forName) {
-      //dialog页面数据写入到tableData页面上
-      //this.$set(tableName,talbeIndex,data)
-      this.$set(this.tableData, this.editForm.index, {
-        date: this.editForm.date,
-        name: this.editForm.name,
-        address: this.editForm.address,
-      });
-      this.editFormVisible = false;
-    },
-  },
-};
+    }
 </script>
-<style lang="less" scoped>
-.mycard {
-  box-shadow: 0 1px rgba(0, 0, 0, 0.15) !important;
-  border-radius: 1%;
-  text-align: center;
-  vertical-align: middle;
-  position: relative;
-  width: 90%;
-  height: 50%;
-}
-.home{
-    top: 50%;
-    left: 50%;
-}
-</style>

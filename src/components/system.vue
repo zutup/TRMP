@@ -11,7 +11,7 @@
         :fetch-suggestions="querySearchAsync"
         placeholder="搜索文件"
         @select="handleSelect"
-        style="position:absolute;right:10%"
+        style=" margin-left:55%;" 
         clearable
       >
         <el-button slot="append" icon="el-icon-search"></el-button>

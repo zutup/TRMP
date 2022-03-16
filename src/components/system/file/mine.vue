@@ -64,6 +64,7 @@ export default {
   position: relative;
   width: 100%;
   height: 100%;
+  min-height: 100%;
 }
 .el-carousel__item h3 {
   color: #475669;

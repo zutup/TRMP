@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router/index.js'
-import VueKonva from 'vue-konva'
 import splitPane from 'vue-splitpane'
 import './assets/icons/iconfont.css';
+import uploader from 'vue-simple-uploader'
 import './plugins/element.js'
 //导入字体图标
 import './assets/fonts/iconfont.css'
@@ -11,10 +11,8 @@ Vue.component('split-pane', splitPane);
 
 //导入全局样式表  
 import './assets/css/globalCss.css'
-import wlExplorer from "wl-explorer";
 import "wl-explorer/lib/wl-explorer.css"
-Vue.use(wlExplorer);
-Vue.use(VueKonva)
+Vue.use(uploader)
 //将全局的echarts对象挂载到Vue的原型对象上
 Vue.prototype.$echarts = window.echarts
 import axios from 'axios'

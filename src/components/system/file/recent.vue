@@ -114,9 +114,7 @@ export default {
 .card:hover {
   box-shadow: 0 0 50px rgba(55, 55, 56, 0.3) !important;
   -webkit-transform: scale(1.2);
-  transform: scale(1.2);
-  height: 260px;
-  width: 255px;
+  transform: scale(1.05);
 }
 .el-header {
   display: flex;

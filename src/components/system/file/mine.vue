@@ -1,11 +1,12 @@
 <template>
   <div>
-    <el-breadcrumb separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item :to="{ path: '/mine' }">系统</el-breadcrumb-item>
-      <el-breadcrumb-item>文件</el-breadcrumb-item>
-      <el-breadcrumb-item>我的</el-breadcrumb-item>
-    </el-breadcrumb>
-    <br />
+     <img
+        src="@/assets/css/images/home.svg"
+        alt=""
+        style="width: 45px; height: 45px; vertical-align: middle"
+      />
+      <b> 主页 </b>
+      <br><br>
     <el-carousel :interval="5000" type="card" height="420px">
       <el-carousel-item v-for="item in imgList" :key="item.name">
         <a href="https://github.com/zutup/TRMP">

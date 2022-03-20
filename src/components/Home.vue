@@ -1,6 +1,5 @@
 <template>
-  <div class="homepage" ref="homepage" style="overflow: hidden">
-    <router-view />
+  <div class="homepage" ref="homepage" style="overflow: hidden" id="homepage">
     <!-- 头部信息 -->
     <el-header>
       <div class="title">
@@ -20,56 +19,28 @@
         active-text-color="#ffd04b"
         active="#home"
         router
+        v-for="item in list"
+        :key="item.name"
+        style="border:none;"
       >
-        <el-menu-item @click="goToAnchor('#home')"
+        <el-menu-item @click="goToAnchor('#'+ item.url)"
           ><a
             href="javascript:void(0);"
-            :class="active == '#home' ? 'active' : ''"
-            >首页</a
+            :class="active == '#'+ item.url ? 'active' : ''" 
+            >{{item.name}} </a
           ></el-menu-item
         >
-        <el-menu-item @click="goToAnchor('#sharing')"
-          ><a
-            href="javascript:void(0);"
-            :class="active == '#sharing' ? 'active' : ''"
-            >文件存储与共享</a
-          ></el-menu-item
-        >
-        <el-menu-item @click="goToAnchor('#search')"
-          ><a
-            href="javascript:void(0);"
-            :class="active == '#search' ? 'active' : ''"
-            >文件查阅</a
-          ></el-menu-item
-        >
-        <el-menu-item @click="goToAnchor('#management')"
-          ><a
-            href="javascript:void(0);"
-            :class="active == '#management' ? 'active' : ''"
-            >文件管理</a
-          ></el-menu-item
-        >
-        <el-menu-item @click="goToAnchor('#preview')"
-          ><a
-            href="javascript:void(0);"
-            :class="active == '#preview' ? 'active' : ''"
-            >数据可视化</a
-          ></el-menu-item
-        >
-        <el-menu-item @click="goToAnchor('#group')"
-          ><a
-            href="javascript:void(0);"
-            :class="active == '#group' ? 'active' : ''"
-            >组群管理</a
-          ></el-menu-item
-        >
+
       </el-menu>
       <!-- <el-button type="info" round @click="dialogFormVisible = true" plain size="small"
         >立即注册</el-button
       > -->
-      <el-button type="primary" round @click="login" plain size="mini"
+      <div class="loginButton">
+         <el-button type="primary" round @click="login" plain size="mini" class="llo"
         ><i class="el-icon-user"> 登 录 / 注 册 </i>
       </el-button>
+      </div>
+     
     </el-header>
     <!-- 主体区域 -->
     <div class="mainpage">
@@ -79,26 +50,18 @@
         <transition name="fade" mode="out-in">
           <router-view></router-view>
         </transition>
+        <!-- 欢迎div -->
         <div class="welcome" id="home">
           <img src="../assets/css/images/hello.svg" alt="" />
           <p
             type="text"
             plain
             class="welcomeText"
-            style="
-              text-align: center;
-              position: absolute;
-              top: 35%;
-              left: 25%;
-              font-size: 30px;
-              background-color: transparent;
-              color: 333333;
-            "
           >
-            T e a c h i n g &nbsp; R e s o u r c e &nbsp; M a n a g e m e n t
+            T e a c h i n g &#32; R e s o u r c e &nbsp; M a n a g e m e n t
             &nbsp; P l a t f o r m
+            
           </p>
-
           <el-button
             type="primary"
             @click="login"
@@ -107,7 +70,7 @@
               text-align: center;
               position: absolute;
               top: 70%;
-              left: 45.5%;
+              left: 46%;
               font-size: 20px;
               border-radius: 6px;
               -moz-opacity: 0.3;
@@ -122,7 +85,8 @@
           @click="goToAnchor('#sharing')"
           class="underscore"
         />
-        <div id="sharing" title="存储共享">
+        <!-- 功能介绍 -->
+          <div id="sharing" title="存储共享">
           <el-container class="lefttext">
             <h5>
               <h1>存储共享<br /><small>文件实时同步,实现高效共享</small></h1>
@@ -130,7 +94,7 @@
                 无论是同步本地与云端文件，还是多人多端对同个文件<br />产生的修改版本，通过强大的文件同步能力，您和同事<br />都能及时看到一致的文件版本。
               </p>
             </h5>
-            <img src="../assets/css/images/share.png" alt="" />
+            <img src="../assets/css/images/sharing.png" alt="" />
           </el-container>
           <el-image
             :src="require('../assets/css/images/permission.png')"
@@ -222,6 +186,8 @@
             <img src="../assets/css/images/groupimg.png" alt="" />
           </el-container>
         </div>
+        <el-backtop class="backtop">UP</el-backtop>
+        <!-- 底部区域 -->
         <div class="footer">
           <span>立即使用，开启简单工作</span>
           <br /><br />
@@ -230,61 +196,13 @@
             plain
             size="mini"
             class="register"
-            @click="dialogFormVisible = true"
+            @click="loginReg()"
             >立即注册</el-button
           >
         </div>
-        <el-dialog title="用户注册" :visible.sync="dialogFormVisible" center>
-          <el-row type="flex" justify="center">
-            <el-form
-              ref="formData"
-              :model="formData"
-              :rules="rules"
-              label-width="80px"
-              @keyup.enter.native="register()"
-            >
-              <el-form-item prop="userName" label="用户名"
-                ><el-input
-                  v-model="formData.userName"
-                  placeholder="请输入用户名"
-                  prefix-icon="el-icon-user"
-                  clearable
-                ></el-input
-              ></el-form-item>
-              <el-form-item prop="password" label="密码"
-                ><el-input
-                  v-model="formData.password"
-                  placeholder="请输入密码"
-                  type="password"
-                  prefix-icon="iconfont icon-3702mima"
-                  clearable
-                ></el-input
-              ></el-form-item>
-              <el-form-item prop="cheackPassword" label="确认密码"
-                ><el-input
-                  v-model="formData.cheackPassword"
-                  placeholder="再次输入密码"
-                  type="password"
-                  prefix-icon="iconfont icon-3702mima"
-                  clearable
-                ></el-input
-              ></el-form-item>
-              <el-form-item>
-                <el-button
-                  type="primary"
-                  @click="register('formData')"
-                  icon="el-icon-upload"
-                  >注册</el-button
-                >
-                <el-button @click="resetForm('formData')"
-                  >重置</el-button
-                ></el-form-item
-              >
-              <router-link to="login">已有账户？立即登录</router-link>
-            </el-form>
-          </el-row>
-        </el-dialog>
-        <el-backtop class="backtop">UP</el-backtop>
+
+          
+
       </el-main>
     </div>
   </div>
@@ -321,6 +239,34 @@ export default {
         password: "",
         cheackPassword: "",
       },
+      list: [
+        {
+          name: "首页",
+          url: "home"
+        },
+        {
+          name: "存储共享",
+          url: "sharing"
+        },
+        {
+          name: "文件查阅",
+          url: "search"
+        },
+
+        {
+          name: "文件管理",
+          url: "management"
+        },
+        {
+          name: "数据可视化",
+          url: "preview"
+        },
+        {
+          name: "组群管理",
+          url: "group"
+        },
+      ],
+
       rules: {
         userName: [
           { required: true, message: "用户名不能为空", trigger: "blur" },
@@ -392,6 +338,8 @@ export default {
       this.active = target;
       const toElement = document.querySelector(target);
       toElement.scrollIntoView(this.scrollIntoViewOptions);
+      // var page = document.getElementById("homepage")
+      // page.className = "mainpage_blur"
     },
     //TODO循环报错
     onScroll() {
@@ -429,22 +377,13 @@ export default {
 <style lang="less" scoped>
 .mainpage {
   background-size: 100% 100%;
-  background: url("../assets/css/images/loginImg4.png");
+  background: url("../assets/css/images/blurpage.png");
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   z-index: 1;
 }
-// .mainpage:after{
-//     content: "";
-//     width:100%;
-//     height:100%;
-//     position: absolute;
-//     background: inherit;
-//     filter: blur(15px);
-//     z-index: 2;
-// }
 .el-header {
   display: flex;
   justify-content: space-between;
@@ -462,9 +401,11 @@ export default {
   }
   a {
     display: block;
-    width: 100%;
+    width: 15px;
     height: 25px;
     text-align: center;
+    margin-right: -100px;
+    margin-left: -100px;
     line-height: 45px;
     color: #333333;
     text-decoration: none; //下划线
@@ -479,9 +420,12 @@ export default {
 .title {
   display: flex;
   align-items: center;
-  width: 400px;
+  width: 600px;
 }
-
+.loginButton{
+  width:430px;
+  text-align: right;
+}
 .el-main {
   > div {
     height: 900px;
@@ -497,7 +441,7 @@ export default {
     height: 100px;
     float: left;
     font-size: 45px;
-    color: #087aaf;
+    color: #122E29;
     margin-top: 55px;
   }
   h5 {
@@ -509,7 +453,7 @@ export default {
   }
   small {
     font-size: 22px;
-    color: black;
+    color: #00595F;
   }
   img {
     float: right;
@@ -518,11 +462,10 @@ export default {
   }
   p {
     float: left;
-    font-size: 16px;
+    font-size: 18px;
     text-align: left;
     font-weight: normal;
     margin-top: 10%;
-    color: #445a5c;
   }
   b {
     float: right;
@@ -535,12 +478,12 @@ export default {
   margin-right: 80px;
   margin-top: 125px;
 }
-.el-menu,
+
 .el-menu-item {
-  margin-right: 16%;
   border: none !important;
   height: 45px !important;
   vertical-align: middle;
+
 }
 .lefttext {
   float: left;
@@ -549,13 +492,13 @@ export default {
 }
 
 .underscore {
-  width: 45px !important;
-  height: 45px !important;
+  width: 40px !important;
+  height: 40px !important;
   vertical-align: middle;
   text-align: center;
   position: absolute;
   bottom: 15px;
-  left: 48.5%;
+  left: 49%;
   cursor: pointer;
 }
 .backtop {
@@ -592,6 +535,12 @@ export default {
   color: rgb(14, 48, 45) !important;
   background-clip: text;
   margin-bottom: 250% !important;
+  text-align: center;
+              position: absolute;
+              top: 35%;
+              left: 25%;
+              font-size: 32px !important;
+              letter-spacing:2px;
 }
 .footer {
   width: 100vw !important;

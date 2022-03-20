@@ -48,7 +48,10 @@ import
     Dropdown,
     DropdownItem,
     DropdownMenu,
-    Avatar
+    Avatar,
+    Drawer,
+    Tag,
+    Tree
 } from 'element-ui'
 
 
@@ -59,6 +62,9 @@ Vue.prototype.$uploadFile = showUploadFileBox
 Vue.use(Button)
 Vue.use(Backtop)
 Vue.use(Progress)
+Vue.use(Tag)
+Vue.use(Tree)
+Vue.use(Drawer)
 Vue.use(Dropdown)
 Vue.use(Avatar)
 Vue.use(DropdownItem)

@@ -9,61 +9,6 @@
       <b> 个人文件</b>
       <br /><br />
       <el-button>新建 </el-button>
-      <!-- <el-dialog :visible.sync="uploadDlg" title="文件上传">
-        <el-dropdown class="upload-drop" trigger="hover">
-        <el-button
-          type="primary"
-          icon="el-icon-upload2"
-          id="uploadFileId"
-          style="margin-left:15px;margin-right:15px"
-          >上传<i class="el-icon-arrow-down el-icon--right"></i
-        ></el-button>
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item @click.native="handleUploadFileBtnClick()">
-            <el-upload
-              class="upload"
-              action="https://jsonplaceholder.typicode.com/posts/"
-              :on-preview="handlePreview"
-              :on-remove="handleRemove"
-              :before-remove="beforeRemove"
-              multiple
-              :limit="3"
-              :on-exceed="handleExceed"
-              :file-list="fileList"
-            >
-              <el-button class="uploadbtn" size="small" type="primary"
-                >点击上传</el-button
-              >
-            </el-upload>
-          </el-dropdown-item>
-          <el-dropdown-item @click.native="handleUploadFileBtnClick()">
-            <el-upload
-              class="upload"
-              action="https://jsonplaceholder.typicode.com/posts/"
-              :on-preview="handlePreview"
-              :on-remove="handleRemove"
-              :before-remove="beforeRemove"
-              multiple
-              :limit="3"
-              :on-exceed="handleExceed"
-              :file-list="fileList"
-            >
-              <el-button class="uploadbtn" size="small" type="primary"
-                >上传文件夹</el-button
-              ></el-upload>
-            </el-dropdown-item
-          >
-          <el-dropdown-item
-            @click.native="pullUpload()"
-            title="截图粘贴或拖拽上传"
-            :disabled="screenWidth <= 520"
-            ><el-button class="uploadbtn" size="small" type="primary"
-                >拖拽上传</el-button></el-dropdown-item
-          >
-        </el-dropdown-menu>
-      </el-dropdown>
-      </el-dialog> -->
-
       <el-button
         type="primary"
         @click="uploadShow()"
@@ -169,7 +114,7 @@
         :default-sort="{ prop: 'date', order: 'descending' }"
       >
         <el-table-column type="selection" width="55"> </el-table-column>
-        <el-table-column prop="name" label="名称" sortable width= "700">
+        <el-table-column prop="name" label="名称" sortable >
           <template slot-scope="scope" class="rowText">
             <i></i>
             <div class="icon">
@@ -188,7 +133,7 @@
         </el-table-column>
         <el-table-column prop="date" label="修改时间" sortable width="280">
         </el-table-column>
-        <el-table-column prop="storage" label="大小" sortable width="200">
+        <el-table-column prop="storage" label="大小" sortable width="220">
         </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
@@ -203,7 +148,7 @@
               type="danger"
               plain
               icon="el-icon-delete"
-              @click.native.prevent="deleteRow(scope.$index, tableData)"
+              @click.native.prevent="deleteRow(scope.$index)"
               circle
             ></el-button>
             <el-button
@@ -282,14 +227,17 @@
             ></el-time-picker>
           </el-col>
         </el-form-item>
-        <el-form-item label="提取码：">
-          <el-input type="textarea"></el-input>
+        <el-form-item
+          label="提取码："
+          :rules="[{ type: 'number', message: '提取码必须为数字值' }]"
+        >
+          <el-input type="textarea" v-model="code"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button
           type="primary"
-          @click="dialogShareFormVisible = false"
+          @click="dialogShareFormVisible = false "
           round
           plain
           >确 定</el-button
@@ -310,7 +258,7 @@ export default {
   data() {
     return {
       options: {
-        target: `http://localhost:8082/system/file/ownFile`, // 上传文件-目标 URL
+        target: `/upload`, // 后台接口
         chunkSize: 1024 * 1024, //  每个分片的大小
         fileParameterName: "file", //  上传文件时文件的参数名，默认 file
         maxChunkRetries: 3, //  并发上传数，默认 3
@@ -331,30 +279,43 @@ export default {
         // 	}
         // },
         query() {},
-        multipleSelection: [],
       },
+      fileStatusText: {
+        success: "上传成功",
+        error: "error",
+        uploading: "上传中",
+        paused: "暂停中",
+        waiting: "等待中",
+      },
+      multipleSelection: [],
+      code: "",
       tableData: [
         {
+          id: '1',
           date: "2022-05-02",
           name: "Resource_Systems.pdf",
           storage: "2568KB",
         },
         {
+          id: '2',
           date: "2022-03-04",
           name: "毕业设计开题报告.doc",
           storage: "168KB",
         },
         {
+          id: '3',
           date: "2022-03-01",
           name: "毕业实习报告.pdf",
           storage: "68KB",
         },
         {
+          id: '4',
           date: "2022-04-03",
           name: "compressed_tracemonkey.pdf",
           storage: "1648KB",
         },
         {
+          id: '5',
           date: "2022-03-13",
           name: "2022毕业设计相关文档模板.zip",
           storage: "708KB",
@@ -362,6 +323,7 @@ export default {
       ],
       form: {
         name: "",
+        code: "",
       },
       editForm: {
         name: "",
@@ -378,13 +340,6 @@ export default {
       uploadDialog: false,
       panelShow: false,
       uploadDlg: false,
-      fileStatusText: {
-        success: "上传成功",
-        error: "error",
-        uploading: "上传中",
-        paused: "暂停中",
-        waiting: "等待中",
-      },
     };
   },
   created() {
@@ -408,8 +363,8 @@ export default {
     handleCurrentChange(val) {
       this.currentRow = val;
     },
-    deleteRow(index, rows) {
-      rows.splice(index, 1);
+    deleteRow(index) {
+      this.tableData.splice(index, 1);
       this.$message({
         type: "success",
         message: "删除成功，可在回收站查看!",
@@ -440,7 +395,7 @@ export default {
     //TODO文件损坏
     download(item) {
       axios({
-        url: "http://localhost:8082/static/pdf/web/viewer.html?file=" + item,
+        url: "http://localhost:8080/static/pdf/web/viewer.html?file=" + item,
         method: "GET",
         responseType: "blob",
         headers: {
@@ -466,31 +421,32 @@ export default {
       }
       if (this.multipleSelection.length == 0)
         this.$message.error("请先至少选择一项");
-
-      this.$confirm("此操作会删除这些文件, 是否继续?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning",
-      })
-        .then(() => {
-          this.multipleSelection.forEach((element) => {
-            this.tableData.forEach((e, i) => {
-              if (element.id == e.id) {
-                this.tableData.splice(i, 1);
-              }
+      else {
+        this.$confirm("此操作会删除这些文件, 是否继续?", "提示", {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning",
+        })
+          .then(() => {
+            this.multipleSelection.forEach((element) => {
+              this.tableData.forEach((e, i) => {
+                if (element.id == e.id) {
+                  this.tableData.splice(i, 1);
+                }
+              });
+            });
+            this.$message({
+              type: "success",
+              message: "批量删除成功，可在回收站查看!",
+            });
+          })
+          .catch(() => {
+            this.$message({
+              type: "info",
+              message: "已取消删除",
             });
           });
-          this.$message({
-            type: "success",
-            message: "批量删除成功，可在回收站查看!",
-          });
-        })
-        .catch(() => {
-          this.$message({
-            type: "info",
-            message: "已取消删除",
-          });
-        });
+      }
     },
     handleFilesAdded() {
       this.panelShow = true;

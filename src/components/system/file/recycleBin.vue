@@ -1,10 +1,20 @@
 <template>
+<div>
+  <img
+        src="@/assets/css/images/bin.svg"
+        alt=""
+        style="width: 45px; height: 45px; vertical-align: middle"
+      />
+      <b> 回收站 </b>
+      <br><br>
   <el-card class="mycard">
     <div>
       <img class="emptyimg" src="@/assets/css/images/bin.png" alt="" />
       <p class="null">回收站为空</p>
     </div>
   </el-card>
+</div>
+  
 </template>
 
 <script>

@@ -1,22 +1,33 @@
 <template>
   <el-container class="head-container">
-    <!-- 头部区域 --><router-view
-    ></router-view>
     <el-header>
       <div>
         <img src="../assets/css/images/logo2.png" alt="" />
         <span>教学资源管理系统&nbsp;&nbsp;<small>控制台</small></span>
       </div>
-      <el-button class="button" type="primary" round plain @click="logoutPtf"
+      <!-- <el-button class="button" type="primary" round plain @click="logoutPtf"
         >退出控制台</el-button
-      >
-      <el-avatar
-        src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-      ></el-avatar>
+      > -->
+
+      <el-dropdown>
+        <el-avatar
+          :src="require('../assets/css/images/panda.jpg')"
+          style="margin-right: 20px"
+        ></el-avatar>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item @click.native="gohome()">返回首页</el-dropdown-item>
+          <el-dropdown-item @click.native="logoutPtf()"
+            >退出控制台</el-dropdown-item
+          >
+        </el-dropdown-menu>
+      </el-dropdown>
     </el-header>
     <el-container>
+      <!-- 侧边 -->
       <el-aside width="250px">
-        <h4>使用概况</h4>
+        <h1 style="font-size: 18px; margin-top: 25px; margin-bottom: 45px">
+          <b>使用概况</b>
+        </h1>
         <el-tooltip
           class="item"
           effect="dark"
@@ -41,39 +52,9 @@
         <el-progress type="circle" :format="format3"></el-progress>
         <p><small>文件(夹)数量</small></p>
       </el-aside>
+      <!-- 主体 -->
       <el-main>
         <router-view></router-view>
-        <h4>功能模块</h4>
-        <el-row :gutter="6">
-          <el-col
-            :span="8"
-            v-for="(items, indexs) in cardListrow1"
-            :key="indexs"
-            class="cardListrow1"
-          >
-            <el-card
-              shadow="hover"
-              class="card"
-              @click.native="gotoManagement(items.path)"
-            >
-              <div>
-                <img :src="items.img" class="cardimgs" />
-                <p class="title">
-                  <strong>{{ items.title }}</strong>
-                </p>
-                <p class="text">{{ items.text }}</p>
-              </div>
-            </el-card>
-          </el-col>
-        </el-row>
-        <el-divider></el-divider>
-        <el-row :gutter="12">
-          <el-col :span="8" v-for="item in cardListrow2" :key="item.func">
-            <el-card shadow="hover" class="card">
-              <p class="cardfont">{{ item.func }}</p>
-            </el-card>
-          </el-col>
-        </el-row>
       </el-main>
     </el-container>
   </el-container>
@@ -81,34 +62,12 @@
 
 <script>
 export default {
-  data() {
-    return {
-      cardListrow1: [
-        {
-          img: require("../assets/css/images/account.png"),
-          title: "账号管理",
-          text: "当前登录账号管理",
-          path: "accountManage",
-        },
-        {
-          img: require("../assets/css/images/groups.png"),
-          title: "群组管理",
-          text: "创建群组、解散群组、群组成员管理",
-          path: "groupsManage",
-        },
-        {
-          img: require("../assets/css/images/users.png"),
-          title: "用户管理",
-          text: "平台用户管理",
-          path: "userManage",
-        }
-      ],
-      cardListrow2: [{ func: "1" }, { func: "2" }, { func: "3" }],
-    };
-  },
   methods: {
     logoutPtf() {
       this.$router.push("/system");
+    },
+    gohome() {
+      this.$router.push("/home");
     },
     format1(num) {
       num = 1; //后台数据
@@ -121,15 +80,6 @@ export default {
     format3(fileNum) {
       fileNum = 17; //后台数据
       return fileNum + "个";
-    },
-    jump(index, path) {},
-    gotoManagement(path) {
-      if (path == "accountManage")
-        this.$router.push("/management/accountManage");
-      else if (path == "groupsManage")
-        this.$router.push("/management/groupsManage");
-      else if (path == "userManage")
-        this.$router.push("/management/userManage");
     },
   },
 };
@@ -182,6 +132,7 @@ export default {
 .el-aside {
   background-color: #edeff1;
   text-align: center;
+  // height: 100vh !important;
 }
 .el-main {
   background-color: #f5f7f8;

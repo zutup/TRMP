@@ -13,8 +13,8 @@
            <tree-table 
           show-index 
           index-text="#" border 
-          :selection-type="false" 
-          :expand-type="false" 
+          :selection-type=false 
+          :expand-type=false 
           :data="catelist" 
           :columns="columns"
           >
@@ -52,67 +52,192 @@ export default {
         pagenum: 1,
         pagesize: 5
       },
-      catelist:[
+      catelist: [
         {
-          cat_id: '1',
-          cat_name: '视频文件',
-          cat_deleted:'false',
+          cat_id: "1",
+          cat_name: "视频文件",
+          cat_pid: "0",
+          cat_level: "0",
+          cat_deleted: false,
           children: [
             {
-              cat_id: '11',
-              cat_name: 'mp4文件',
-              cat_deleted:'false',
+              cat_id: "11",
+              cat_name: "mp4文件",
+              cat_pid: "1",
+              cat_level: "1",
+              cat_deleted: false,
+              children: [
+                {
+                  cat_id: "11",
+                  cat_name: "数据结构.mp4",
+                  cat_pid: "3",
+                  cat_level: "2",
+                  cat_deleted: false,
+                },
+                {
+                  cat_id: "11",
+                  cat_name: "计算机组成原理.mp4",
+                  cat_pid: "3",
+                  cat_level: "2",
+                  cat_deleted: false,
+                },
+              ],
             },
             {
-              cat_id: '12',
-              cat_name: 'avi文件',
-              cat_deleted:'false',
-            }
-          ]
+              cat_id: "12",
+              cat_name: "avi文件",
+              cat_pid: "1",
+              cat_level: "1",
+              cat_deleted: false,
+              children: [
+                {
+                  cat_id: "21",
+                  cat_name: "计算机网络.avi",
+                  cat_pid: "3",
+                  cat_level: "2",
+                  cat_deleted: false,
+                },
+                {
+                  cat_id: "22",
+                  cat_name: "操作系统.avi",
+                  cat_pid: "3",
+                  cat_level: "2",
+                  cat_deleted: false,
+                },
+              ],
+            },
+          ],
         },
         {
-          cat_id: '2',
-          cat_name: '图片文件',
-           cat_deleted:'false',
-           children: [
+          cat_id: "2",
+          cat_name: "图片文件",
+          cat_pid: "0",
+          cat_level: "0",
+          cat_deleted: false,
+          children: [
             {
-              cat_id: '21',
-              cat_name: 'jpg文件',
-              cat_deleted:'false',
+              cat_id: "21",
+              cat_name: "jpg文件",
+              cat_deleted: false,
+              children: [
+                {
+                  cat_id: "11",
+                  cat_name: "111.jpg",
+                  cat_pid: "3",
+                  cat_level: "2",
+                  cat_deleted: true,
+                },
+              ],
             },
             {
-              cat_id: '22',
-              cat_name: 'png文件',
-              cat_deleted:'false',
+              cat_id: "24",
+              cat_name: "png文件",
+              cat_pid: "1",
+              cat_level: "1",
+              cat_deleted: false,
+              children: [
+                {
+                  cat_id: "76",
+                  cat_name: "aag.png",
+                  cat_deleted: false,
+                },
+              ],
             },
             {
-              cat_id: '23',
-              cat_name: 'svg文件',
-              cat_deleted:'false',
-            }
-          ]
+              cat_id: "23",
+              cat_name: "svg文件",
+              cat_pid: "1",
+              cat_level: "1",
+              cat_deleted: false,
+              children: [
+                {
+                  cat_id: "91",
+                  cat_name: "panda.svg",
+                  cat_pid: "3",
+                  cat_level: "2",
+                  cat_deleted: false,
+                },
+              ],
+            },
+          ],
         },
         {
-          cat_id: '3',
-          cat_name: 'office文件',
-           cat_deleted:'false',
-           children: [
+          cat_id: "3",
+          cat_name: "office文件",
+          cat_pid: "1",
+          cat_level: "1",
+          cat_deleted: false,
+          children: [
             {
-              cat_id: '31',
-              cat_name: 'word文件',
-              cat_deleted:'false',
+              cat_id: "31",
+              cat_name: "word文件",
+              cat_pid: "1",
+              cat_level: "1",
+              cat_deleted: false,
+              children: [
+                {
+                  cat_id: "18",
+                  cat_name: "数据结构.doc",
+                  cat_pid: "3",
+                  cat_level: "2",
+                  cat_deleted: false,
+                },
+                {
+                  cat_id: "15",
+                  cat_name: "计算机体系结构.docx",
+                  cat_pid: "3",
+                  cat_level: "2",
+                  cat_deleted: false,
+                },
+              ],
             },
             {
-              cat_id: '32',
-              cat_name: 'excel文件',
-              cat_deleted:'false',
+              cat_id: "32",
+              cat_name: "excel文件",
+              cat_pid: "1",
+              cat_level: "1",
+              cat_deleted: false,
+              children: [
+                {
+                  cat_id: "86",
+                  cat_name: "成绩单.xlsx",
+                  cat_pid: "3",
+                  cat_level: "2",
+                  cat_deleted: false,
+                },
+                {
+                  cat_id: "51",
+                  cat_name: "计算机导论.xlsx",
+                  cat_pid: "3",
+                  cat_level: "2",
+                  cat_deleted: false,
+                },
+              ],
             },
             {
-              cat_id: '33',
-              cat_name: 'ppt文件',
-              cat_deleted:'false',
-            }
-          ]
+              cat_id: "33",
+              cat_name: "ppt文件",
+              cat_pid: "1",
+              cat_level: "1",
+              cat_deleted: false,
+              children: [
+                {
+                  cat_id: "16",
+                  cat_name: "开题报告.ppt",
+                  cat_pid: "3",
+                  cat_level: "2",
+                  cat_deleted: false,
+                },
+                {
+                  cat_id: "63",
+                  cat_name: "中期报告.ppt",
+                  cat_pid: "3",
+                  cat_level: "2",
+                  cat_deleted: false,
+                },
+              ],
+            },
+          ],
         },
       ],
       total: 3,//TODO默认0

@@ -1,6 +1,13 @@
 <template>
   <div>
     <router-view/>
+     <img
+        src="@/assets/css/images/message.svg"
+        alt=""
+        style="width: 45px; height: 45px; vertical-align: middle"
+      />
+      <b> 消 息</b>
+      <br /><br />
     <menubar v-show="this.$route.meta.leavel"></menubar>
     <el-card class="box-card" :body-Style="{ 'text-align': 'center' }">
       <div slot="header" class="clearfix">

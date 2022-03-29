@@ -1,12 +1,11 @@
 <template>
   <div>
-     <img
-        src="@/assets/css/images/home.svg"
-        alt=""
-        style="width: 45px; height: 45px; vertical-align: middle"
-      />
-      <b> 主页 </b>
-      <br><br>
+    <img
+      src="@/assets/css/images/home.svg"
+      alt=""
+      style="width: 45px; height: 45px; vertical-align: middle"
+    />
+    <b> 主页 </b>
     <el-carousel :interval="5000" type="card" height="420px">
       <el-carousel-item v-for="item in imgList" :key="item.name">
         <a href="https://github.com/zutup/TRMP">
@@ -19,17 +18,43 @@
         </a>
       </el-carousel-item>
     </el-carousel>
-    <el-card class="mycard">
-      <div>
-        <img class="emptyimg" src="@/assets/css/images/empty.jpg" alt="" />
-        <p class="null">暂无数据</p>
-      </div>
-    </el-card>
+    <el-row :gutter="20">
+      <!-- 用户信息 -->
+      <el-col span="6">
+        <el-card shadow="hover" style="height:360px">
+          <div style="margin-top:10%">
+            <img
+              :src="userImg"
+              alt=""
+              style="border-radius:50%;width:30%;margin-left:20px"
+            />
+            <div style="float:right;margin-right:100px;">
+              <h1 style="font-size:30px;height:20px">admin</h1>
+              <p>超级管理员</p>
+            </div>
+          </div>
+          <br />
+          <el-divider></el-divider>
+          <br />
+          <div style="margin-left:20px">
+            <small>上次登录时间：<span>2022-3-27</span></small>
+            <br />
+            <small>上次登录地点：<span>河南省郑州市</span></small>
+          </div>
+        </el-card>
+      </el-col>
+      <!-- 图表 -->
+      <echart></echart>
+    </el-row>
   </div>
 </template>
 
 <script>
+import Echart from "./datacharts/Echarts.vue";
 export default {
+  components: {
+    Echart,
+  },
   data() {
     return {
       imgList: [
@@ -51,21 +76,16 @@ export default {
           src: require("@/assets/css/images/welcome.gif"),
         },
       ],
+      userImg: require("@/assets/css/images/panda.jpg"),
+      allData: [],
     };
   },
 };
 </script>
 
 <style lang="less" scoped>
-.mycard {
-  box-shadow: 0 1px rgba(0, 0, 0, 0.15) !important;
-  border-radius: 1%;
-  text-align: center;
-  vertical-align: middle;
-  position: relative;
-  width: 100%;
-  height: 100%;
-  min-height: 100%;
+.el-card {
+  display: table-cell;
 }
 .el-carousel__item h3 {
   color: #475669;

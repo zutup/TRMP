@@ -104,6 +104,21 @@
     </div>
     <br />
     <el-card class="mycard" style="height: 740px">
+      <el-row>
+        <el-input
+            placeholder="请输入内容"
+            clearable
+            v-model="queryInfo.query"
+            @clear="getMyFileList"
+            style="width:350px;float:right"
+          >
+          <el-button
+              slot="append"
+              icon="el-icon-search"
+              @click="getMyFileList"
+            ></el-button>
+          </el-input>
+
       <el-table
         :data="tableData"
         style="width: 100%"
@@ -168,6 +183,21 @@
           </template>
         </el-table-column>
       </el-table>
+      <br>
+                 <!-- 分页 -->
+        <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page="queryInfo.pagenum"
+          :page-sizes="[3, 5, 10, 15]"  
+          :page-size="queryInfo.pagesize"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="total"
+          background
+        >
+        </el-pagination>
+      </el-row>
+      
     </el-card>
     <el-dialog
       title="文件重命名"
@@ -243,7 +273,7 @@
           >确 定</el-button
         >
       </div>
-      <div slot="footer">tips: 若分享的文件是视频或音频,有效期仅为一小时</div>
+      <div slot="footer"> <small>tips: 若分享的文件是视频或音频,有效期仅为一小时</small> </div>
     </el-dialog>
   </div>
 </template>
@@ -321,6 +351,12 @@ export default {
           storage: "708KB",
         },
       ],
+      queryInfo: {
+        type: 3,
+        pagenum: 1,
+        pagesize: 5
+      },
+      total: 5,//TODO默认0
       form: {
         name: "",
         code: "",
@@ -347,6 +383,8 @@ export default {
       i.show = false;
       return i;
     });
+    //TODO
+    // this.getMyFileList();
   },
   methods: {
     handleEdit: function (index, row) {
@@ -369,6 +407,19 @@ export default {
         type: "success",
         message: "删除成功，可在回收站查看!",
       });
+    },
+    //获取文件列表数据
+    async getMyFileList(){
+      const {data : res} = await this.$http.get('myfile',{
+        params: this.queryInfo        
+      })
+      if(res.meta.status !== 200){
+        return this.$message.error('获取文件列表失败！')
+      }
+      this.$message.success('获取文件列表成功！')
+      //更新列表数据
+      this.tableData = res.data
+      this.total = res.data.total
     },
     handleCancel(formName) {
       this.editFormVisible = false;

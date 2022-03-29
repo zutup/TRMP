@@ -4,10 +4,10 @@
       <img
         src="@/assets/css/images/recent.svg"
         alt=""
-        style=" width: 45px;height: 45px;vertical-align:middle"
+        style=" width: 45px;height: 45px;vertical-align:middle; overflow-x: hidden;margin-left:-15px"
       />
       <b> 最近使用系统功能</b>
-      <el-row :gutter="0" class="row">
+              <el-row :gutter="0" class="row">
         <el-col
           :span="6"
           v-for="(items, indexs) in cardListrow1"
@@ -72,7 +72,7 @@ export default {
   },
   methods: {
     gotoManagement(path) {
-      if (path == "mine") this.$router.push("/system/file/mine");
+      if (path == "mine") this.$router.push("/system/mine");
       else if (path == "ownFile") this.$router.push("/system/file/ownFile");
       else if (path == "cooperate") this.$router.push("/system/file/cooperate");
       else if (path == "recent") this.$router.push("/system/file/recent");
@@ -107,8 +107,8 @@ export default {
     linear,
     0% 100%,
     10% 0%,
-    from(#85c5eb),
-    to(#f6f6f8)
+    from(#E8FDFF),
+    to(#C7F8FF)
   );
 }
 .card:hover {

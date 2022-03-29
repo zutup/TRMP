@@ -18,23 +18,233 @@ export default {
   data() {
     return {
       chartInstance: null,
-      allData: null,
+      allData: [
+        {
+          name: "个人文件",
+          children: [
+            {
+              name: "office文件",
+              value: 20,
+              children: [
+                {
+                  name: "Word文档",
+                  value: 10,
+                },
+                {
+                  name: "PPT演示文稿",
+                  value: 4,
+                },
+                {
+                  name: "excel表格",
+                  value: 6,
+                },
+              ],
+            },
+            {
+              name: "音视频文件",
+              value: 13,
+              children: [
+                {
+                  name: "MP3文件",
+                  value: 7,
+                },
+                {
+                  name: "MP4文件",
+                  value: 4,
+                },
+                {
+                  name: "avi文件",
+                  value: 2,
+                },
+              ],
+            },
+            {
+              name: "图片文件",
+              value: 21,
+              children: [
+                {
+                  name: "PNG文件",
+                  value: 8,
+                },
+                {
+                  name: "JPG文件",
+                  value: 6,
+                },
+                {
+                  name: "SVG文件",
+                  value: 7,
+                },
+              ],
+            },
+            {
+              name: "其他文件",
+              value: 30,
+              children: [
+                {
+                  name: "txt文件",
+                  value: 10,
+                },
+                {
+                  name: "exe文件",
+                  value: 6,
+                },
+                {
+                  name: "html文件",
+                  value: 4,
+                },
+                {
+                  name: "pdf文件",
+                  value: 10,
+                },
+              ],
+            },
+          ],
+        },
+        {
+          name: "公共资源库",
+          children: [
+            {
+              name: "office文件",
+              value: 20,
+              children: [
+                {
+                  name: "Word文档",
+                  value: 10,
+                },
+                {
+                  name: "PPT演示文稿",
+                  value: 4,
+                },
+                {
+                  name: "excel表格",
+                  value: 6,
+                },
+              ],
+            },
+            {
+              name: "音视频文件",
+              value: 13,
+              children: [
+                {
+                  name: "MP3文件",
+                  value: 7,
+                },
+                {
+                  name: "MP4文件",
+                  value: 4,
+                },
+                {
+                  name: "avi文件",
+                  value: 2,
+                },
+              ],
+            },
+            {
+              name: "图片文件",
+              value: 21,
+              children: [
+                {
+                  name: "PNG文件",
+                  value: 8,
+                },
+                {
+                  name: "JPG文件",
+                  value: 6,
+                },
+                {
+                  name: "SVG文件",
+                  value: 7,
+                },
+              ],
+            },
+            {
+              name: "其他文件",
+              value: 30,
+              children: [
+                {
+                  name: "txt文件",
+                  value: 10,
+                },
+                {
+                  name: "exe文件",
+                  value: 6,
+                },
+                {
+                  name: "html文件",
+                  value: 4,
+                },
+                {
+                  name: "pdf文件",
+                  value: 10,
+                },
+              ],
+            },
+            {
+              name: "程序文件",
+              value: 30,
+              children: [
+                {
+                  name: ".c文件",
+                  value: 10,
+                },
+                {
+                  name: ".cpp文件",
+                  value: 6,
+                },
+                {
+                  name: ".asm文件",
+                  value: 4,
+                },
+                {
+                  name: ".dat文件",
+                  value: 10,
+                },
+              ],
+            },
+          ],
+        },
+        {
+          name: "文件统计",
+          children: [
+            {
+              name: "资源库文件",
+              value: 104,
+              children: [
+                {
+                  name: "资源库文件",
+                  value: 30291,
+                },
+              ],
+            },
+            {
+              name: "个人文件",
+              value: 74,
+              children: [
+                {
+                  name: "个人文件",
+                  value: 20,
+                },
+              ],
+            },
+          ],
+        },
+      ],
       currentIndex: 0, // 当前所展示出的一级分类数据
-      titleFontSize: 0
-    }
+      titleFontSize: 0,
+    };
   },
   computed: {
     catName() {
       if (!this.allData) {
-        return ''
+        return "";
       } else {
-        return this.allData[this.currentIndex].name
+        return this.allData[this.currentIndex].name;
       }
     },
     comStyle() {
       return {
-        fontSize: this.titleFontSize / 2 + 'px'
-      }
+        fontSize: this.titleFontSize / 2 + "px",
+      };
     },
   },
   // created() {
@@ -43,7 +253,7 @@ export default {
   // },
   mounted() {
     this.initChart();
-    this.getData()
+    this.getData();
     // 发送数据给服务器, 告诉服务器, 我现在需要数据
     // this.$socket.send({
     //   action: 'getData',
@@ -51,132 +261,165 @@ export default {
     //   chartName: 'hotproduct',
     //   value: ''
     // })
-    window.addEventListener('resize', this.screenAdapter)
-    this.screenAdapter()
+    window.addEventListener("resize", this.screenAdapter);
+    this.screenAdapter();
   },
   destroyed() {
-    window.removeEventListener('resize', this.screenAdapter)
+    window.removeEventListener("resize", this.screenAdapter);
     // 在组件销毁的时候, 进行回调函数的取消
     // this.$socket.unRegisterCallBack('hotData')
   },
   methods: {
     initChart() {
-      this.chartInstance = this.$echarts.init(document.getElementById("pie"),"vintage")
+      this.chartInstance = this.$echarts.init(
+        document.getElementById("pie"),
+        "vintage"
+      );
       const initOption = {
         legend: {
-          top: '10%',
-          icon: 'circle'
+          top: "10%",
+          icon: "circle",
         },
         tooltip: {
           show: true,
-          formatter: arg => {
+          formatter: (arg) => {
             // console.log(arg)
-            const thirdCategory = arg.data.children
+            const thirdCategory = arg.data.children;
             // 计算出所有三级分类的数值总和
-            let total = 0
-            thirdCategory.forEach(item => {
-              total += item.value
-            })
-            let retStr = ''
-            thirdCategory.forEach(item => {
+            let total = 0;
+            thirdCategory.forEach((item) => {
+              total += item.value;
+            });
+            let retStr = "";
+            thirdCategory.forEach((item) => {
               retStr += `
-              ${item.name}:${parseInt((item.value / total) * 100) + '%'}
+              ${item.name}:${parseInt((item.value / total) * 100) + "%"}
               <br/>
-              `
-            })
-            return retStr
-          }
+              `;
+            });
+            return retStr;
+          },
+        },
+        toolbox: {
+          show: true,
+          feature: {
+            mark: { show: true },
+            dataView: { show: true, readOnly: false },
+            restore: { show: true },
+            saveAsImage: { show: true },
+          },
         },
         series: [
           {
-            type: 'pie',
+            name: "Nightingale Chart",
+            type: "pie",
+            data: [
+              { value: 40, name: " 1" },
+              { value: 38, name: " 2" },
+              { value: 32, name: " 3" },
+              { value: 30, name: " 4" },
+              { value: 28, name: " 5" },
+              { value: 26, name: " 6" },
+              { value: 22, name: " 7" },
+              { value: 18, name: " 8" },
+            ],
+            radius: [50, 250],
+            center: ["50%", "50%"],
+            roseType: "area",
+            itemStyle: {
+              borderRadius: 8,
+            },
             label: {
-              show: false
+              show: false,
             },
             emphasis: {
               label: {
-                show: true
+                show: true,
               },
               labelLine: {
-                show: false
-              }
-            }
-          }
-        ]
-      }
-      this.chartInstance.setOption(initOption)
+                show: false,
+              },
+            },
+          },
+        ],
+      };
+      this.chartInstance.setOption(initOption);
     },
     async getData() {
       // 获取服务器的数据, 对this.allData进行赋值之后, 调用updateChart方法更新图表
-      const { data: ret } = await this.$http.get('hotproduct')
-      this.allData = ret
-      console.log(this.allData)
-      this.updateChart()
+      const { data: ret } = await this.$http.get("hotproduct");
+      this.allData = ret;
+      console.log(this.allData);
+      this.updateChart();
     },
     updateChart() {
       // 处理图表需要的数据
-      const legendData = this.allData[this.currentIndex].children.map(item => {
-        return item.name
-      })
-      const seriesData = this.allData[this.currentIndex].children.map(item => {
-        return {
-          name: item.name,
-          value: item.value,
-          children: item.children // 新增加children的原因是为了在tooltip中的formatter的回调函数中,来拿到这个二级分类下的三级分类数据
+      const legendData = this.allData[this.currentIndex].children.map(
+        (item) => {
+          return item.name;
         }
-      })
+      );
+      const seriesData = this.allData[this.currentIndex].children.map(
+        (item) => {
+          return {
+            name: item.name,
+            value: item.value,
+            children: item.children, // 新增加children的原因是为了在tooltip中的formatter的回调函数中,来拿到这个二级分类下的三级分类数据
+          };
+        }
+      );
       const dataOption = {
         legend: {
-          data: legendData
+          data: legendData,
         },
         series: [
           {
-            data: seriesData
-          }
-        ]
-      }
-      this.chartInstance.setOption(dataOption)
+            data: seriesData,
+          },
+        ],
+      };
+      this.chartInstance.setOption(dataOption);
     },
     screenAdapter() {
-      this.titleFontSize = (this.$refs.hot_ref.offsetWidth / 100) * 3.0
+      this.titleFontSize = (this.$refs.hot_ref.offsetWidth / 100) * 3.0;
       const adapterOption = {
         title: {
           textStyle: {
-            fontSize: this.titleFontSize
-          }
+            fontSize: this.titleFontSize,
+          },
         },
         legend: {
           itemWidth: this.titleFontSize,
           itemHeight: this.titleFontSize,
           itemGap: this.titleFontSize / 2,
           textStyle: {
-            fontSize: this.titleFontSize / 3.0
-          }
+            fontSize: this.titleFontSize / 3.0,
+          },
         },
         series: [
           {
             radius: this.titleFontSize * 3.5,
-            center: ['50%', '55%']
-          }
-        ]
-      }
-      this.chartInstance.setOption(adapterOption)
-      this.chartInstance.resize()
+            center: ["50%", "55%"],
+          },
+        ],
+      };
+      this.chartInstance.setOption(adapterOption);
+      this.chartInstance.resize();
     },
     toLeft() {
-      this.currentIndex--
+      this.currentIndex--;
       if (this.currentIndex < 0) {
-        this.currentIndex = this.allData.length - 1
+        this.currentIndex = this.allData.length - 1;
       }
-      this.updateChart()
+      this.updateChart();
     },
     toRight() {
-      this.currentIndex++
+      this.currentIndex++;
       if (this.currentIndex > this.allData.length - 1) {
-        this.currentIndex = 0
+        this.currentIndex = 0;
       }
-      this.updateChart()
-    }
+      this.updateChart();
+    },
   },
   // watch: {
   //   theme() {
@@ -187,7 +430,7 @@ export default {
   //     this.updateChart() // 更新图表的展示
   //   }
   // }
-}
+};
 </script>
 
 <style lang="less" scoped>

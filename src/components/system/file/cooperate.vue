@@ -6,9 +6,9 @@
         alt=""
         style=" width: 45px;height: 45px;vertical-align:middle; border-radius:5px"
       />
-      <b> 与我协作</b>
+      <b > 与我协作</b>
       <br /><br />
-      <el-button type="primary">新建协作组</el-button>
+      <el-button type="primary" oncontextdown="go" >新建协作组</el-button>
     </div>
     <br />
     <el-card class="mycard">
@@ -84,6 +84,11 @@ export default {
       ],
     };
   },
+  methods: {
+    go(){
+      this.$router.push('/loginReg')
+    }
+  }
 };
 </script>
 

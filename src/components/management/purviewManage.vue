@@ -81,6 +81,7 @@
             <el-table-column type="index" label="#"></el-table-column>
             <el-table-column prop="roleName" label="角色名称"></el-table-column>
             <el-table-column prop="roleDesc" label="角色描述"></el-table-column>
+            <el-table-column prop="roleStorage" label="存储空间"></el-table-column>
             <el-table-column label="操作">
               <template v-slot="scope">
                 <el-button
@@ -188,6 +189,7 @@ export default {
         {
           roleName: "admin",
           roleDesc: "超级管理员",
+          roleStorage: "max",
           id: "1",
           children: [
             {
@@ -273,6 +275,7 @@ export default {
         {
           roleName: "staff",
           roleDesc: "教师、工作人员",
+          roleStorage: "10GB",
           id: "2",
           children: [
             {
@@ -328,6 +331,7 @@ export default {
         {
           roleName: "student",
           roleDesc: "学生",
+          roleStorage: "1GB",
           id: "3",
            children: [
             {

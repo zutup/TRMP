@@ -1,13 +1,20 @@
 <template>
   <div class="login-register">
+    <router-view></router-view>
+    <img
+      src="@/assets/css/images/leave.svg"
+      alt=""
+      @click="exit"
+      style=" width: 50px;height:30px;cursor:pointer;margin-left:15px;margin-top:15px;overflow-x: hidden;border-radius:5px"
+    />
     <div class="contain">
       <div class="big-box" :class="{ active: isLogin }">
         <div class="big-contain" v-if="isLogin">
           <div class="title">账户登录</div>
           <div class="bform">
-            <input type="email" placeholder="邮箱" v-model="form.useremail" />
-            <span class="errTips" v-if="emailError">* 邮箱填写错误 *</span>
-            <input type="password" placeholder="密码" v-model="form.userpwd" />
+            <input type="text" placeholder="用户名" v-model="form.username" />
+            <span class="errTips" v-if="emailError">* 用户名填写错误 *</span>
+            <input type="password" placeholder="密码" v-model="form.password" />
             <span class="errTips" v-if="emailError">* 密码填写错误 *</span>
           </div>
           <!-- TODO -->
@@ -41,6 +48,7 @@
 </template>
 
 <script>
+import { login } from "../api";
 export default {
   name: "login-register",
   data() {
@@ -52,8 +60,10 @@ export default {
       form: {
         username: "",
         useremail: "",
-        userpwd: "",
+        password: "",
       },
+      account: "",
+      password: "",
     };
   },
   methods: {
@@ -61,20 +71,22 @@ export default {
       this.isLogin = !this.isLogin;
       this.form.username = "";
       this.form.useremail = "";
-      this.form.userpwd = "";
+      this.form.password = "";
+    },
+    exit() {
+      this.$router.push("/home");
     },
     login() {
-      const self = this;
-      if (self.form.useremail != "" && self.form.userpwd != "") {
-        self
-          .$axios({
-            method: "post",
-            url: "http://127.0.0.1:10520/api/user/login",
-            data: {
-              email: self.form.useremail,
-              password: self.form.userpwd,
-            },
-          })
+      // console.log(this.form);
+      if (this.form.username != "" && this.form.password != "") {
+        this.$http({
+          method: "post",
+          url: "http://127.0.0.1:8888/api/private/v1/login",
+          data: {
+            username: this.form.username,
+            password: this.form.password,
+          },
+        })
           .then((res) => {
             switch (res.data) {
               case 0:
@@ -98,11 +110,20 @@ export default {
         alert("填写不能为空！");
       }
     },
-    loginTest(){
-      this.$message({
-        type: "success",
-        message: "登陆成功",
-      });
+    async loginTest() {
+      // this.$message({
+      //   type: "success",
+      //   message: "登陆成功",
+      // });
+      // this.$router.push("/system");
+      const { data: res } = await this.$http.post("login", this.form);
+      console.log(res.data.token);
+      if (res.meta.status != 200) {
+        return this.$message.error("用户名或密码错误！");
+      }
+      this.$message.success("登录成功!");
+      window.sessionStorage.setItem("token", res.data.token);
+      //先token后跳转，否则报错
       this.$router.push("/system");
     },
     register() {
@@ -115,7 +136,7 @@ export default {
         self
           .$axios({
             method: "post",
-            url: "http://127.0.0.1:10520/api/user/add",
+            // url: "http://127.0.0.1:10520/api/user/add",
             data: {
               username: self.form.username,
               email: self.form.useremail,
@@ -159,7 +180,7 @@ export default {
   width: 758px;
   height: 420px;
   position: relative;
-  top: 50%;
+  top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #fff;

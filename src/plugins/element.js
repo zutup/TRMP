@@ -51,7 +51,12 @@ import
     Avatar,
     Drawer,
     Tag,
-    Tree
+    Tree,
+    Steps,
+    Step,
+    TabPane,
+    Tabs,
+    Cascader,
 } from 'element-ui'
 
 
@@ -63,10 +68,15 @@ Vue.use(Button)
 Vue.use(Backtop)
 Vue.use(Progress)
 Vue.use(Tag)
+Vue.use(Cascader)
+Vue.use(Tabs)
+Vue.use(TabPane)
 Vue.use(Tree)
 Vue.use(Drawer)
 Vue.use(Dropdown)
 Vue.use(Avatar)
+Vue.use(Steps)
+Vue.use(Step)
 Vue.use(DropdownItem)
 Vue.use(DropdownMenu)
 Vue.use(Tooltip)

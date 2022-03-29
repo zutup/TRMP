@@ -5,7 +5,7 @@
       <el-breadcrumb-item :to="{ path: '/console' }">控制台</el-breadcrumb-item>
       <el-breadcrumb-item>用户管理</el-breadcrumb-item>
     </el-breadcrumb>
-    <br><br>
+    <br /><br />
     <el-card class="box-card">
       <el-row :gutter="20">
         <el-col :span="7">
@@ -25,7 +25,11 @@
         </el-col>
         <el-col :span="4">
           <!-- 添加用户区域 -->
-          <el-button type="primary" @click="addDialogVisible = true" round icon="el-icon-plus"
+          <el-button
+            type="primary"
+            @click="addDialogVisible = true"
+            round
+            icon="el-icon-plus"
             >用户添加</el-button
           >
         </el-col>
@@ -34,10 +38,11 @@
       <el-table :data="userData.userList" stripe style="width: 100%" border>
         <el-table-column type="index" label="#"></el-table-column>
         <el-table-column prop="username" label="姓名"></el-table-column>
+        <el-table-column prop="user_id" label="用户id"></el-table-column>
         <el-table-column prop="email" label="邮箱"></el-table-column>
         <el-table-column prop="mobile" label="电话"></el-table-column>
-        <el-table-column prop="role_name" label="角色"></el-table-column>
-        <el-table-column label="状态">
+
+        <!-- <el-table-column label="状态">
           <template v-slot="scope">
             <el-switch
               v-model="scope.row.mg_state"
@@ -47,14 +52,15 @@
             >
             </el-switch>
           </template>
-        </el-table-column>
+        </el-table-column> -->
+        <el-table-column prop="role_name" label="角色"></el-table-column>
+        <el-table-column prop="userStorage" label="存储容量"></el-table-column>
         <el-table-column label="操作" width="180px">
           <template v-slot="scope">
             <!-- 修改按钮 -->
             <el-button
               type="primary"
               icon="el-icon-edit"
-
               circle
               @click="showEditDialog(scope.row.id)"
             ></el-button>
@@ -112,6 +118,9 @@
         <el-form-item label="用户名" prop="username">
           <el-input v-model="addForm.username"></el-input>
         </el-form-item>
+        <el-form-item label="id" prop="user_id">
+          <el-input v-model="addForm.user_id"></el-input>
+        </el-form-item>
         <el-form-item label="密码" prop="password">
           <el-input v-model="addForm.password"></el-input>
         </el-form-item>
@@ -163,22 +172,26 @@
       @close="setRolesDialogClosed"
       width="50%"
     >
-      <div>
-        <p>当前的用户 : {{ userInfo.username }}</p>
-        <p>当前的角色 : {{ userInfo.role_name }}</p>
-        <p>
-          分配新角色:
-          <el-select v-model="selectRoleId" placeholder="请选择">
-            <el-option
-              v-for="item in rolesList"
-              :key="item.id"
-              :label="item.roleName"
-              :value="item.id"
-            >
-            </el-option>
-          </el-select>
-        </p>
-      </div>
+      <el-form :model="userList" label-width="80px" ref="editForm">
+        <div>
+          <p>当前的用户 : {{ userInfo.username }}</p>
+          <p>当前的角色 : {{ userInfo.role_name }}</p>
+          <template>
+            <p>
+              分配新角色:
+              <el-select v-model="selectRoleId" placeholder="请选择">
+                <el-option
+                  v-for="item in roleOptions"
+                  :key="item.value"
+                  :label="item.role_name"
+                  :value="item.value"
+                >
+                </el-option>
+              </el-select>
+            </p>
+          </template>
+        </div>
+      </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="setRolesDialogVisible = false">取 消</el-button>
         <el-button type="primary" @click="saveRolesInfo">确 定</el-button>
@@ -208,26 +221,32 @@ export default {
       userData: {
         userList: [
           {
-            username:'zxc',
-            email: '1252536388@qq.com',
-            mobile: '19939707043',
-            role_name: 'admin',
-            mg_state: true
+            username: "zxc",
+            user_id: "1",
+            email: "1252536388@qq.com",
+            mobile: "19939707043",
+            role_name: "admin",
+            userStorage: "max",
+            // mg_state: true
           },
           {
-            username:'usfbak',
-            email: '24236388@qq.com',
-            mobile: '124378634242',
-            role_name: '教师',
-            mg_state: true
+            username: "奥特曼",
+            user_id: "126",
+            email: "24236388@qq.com",
+            mobile: "124378634242",
+            role_name: "staff",
+            userStorage: "10GB",
+            // mg_state: true
           },
           {
-            username:'cafe',
-            email: '76352432578@qq.com',
-            mobile: '17387344242',
-            role_name: '学生',
-            mg_state: false
-          }
+            username: "波比",
+            user_id: "12423",
+            email: "76352432578@qq.com",
+            mobile: "17387344242",
+            role_name: "student",
+            userStorage: "1GB",
+            // mg_state: false
+          },
         ],
         total: 0,
       },
@@ -247,7 +266,22 @@ export default {
       // 分配角色用户信息
       userInfo: {},
       // 分配角色列表
-      rolesList: [],
+      roleOptions: [
+        {
+          value: "管理员",
+          role_name: "admin",
+        },
+
+        {
+          value: "教职工",
+          role_name: "staff",
+        },
+        {
+          value: "学生",
+          role_name: "student",
+        },
+      ],
+      value: "",
       // 保存已经选中的角色id值
       selectRoleId: "",
       // 查询用户的对象
@@ -258,16 +292,17 @@ export default {
     this.getUserList();
   },
   methods: {
+    //TODO
     async getUserList() {
       const { data: res } = await this.$http.get("users", {
         params: this.queryInfo,
       });
-      if (res.meta.status !== 200) {
-        this.$message.error("获取用户列表失败!");
-      }
+      // if (res.meta.status !== 200) {
+      //   this.$message.error("获取用户列表失败!");
+      // }
       this.$message.success("获取用户列表成功!");
-      this.userData.userList = res.data.users;
-      this.userData.total = res.data.total;
+      // this.userData.userList = res.data.users; //TODOdata中user字段
+      // this.userData.total = res.data.total;
       // console.log(res)
     },
     // 监听 pagesize 改变事件 每页显示的个数
@@ -286,7 +321,7 @@ export default {
     async userStatuChanged(userInfo) {
       // console.log(userInfo)
       const { data: res } = await this.$http.put(
-        `users/${userInfo.id}/state/${userInfo.mg_state}`
+        `users/${userInfo.user_id}/state/${userInfo.mg_state}`
       );
       if (res.meta.status !== 200) {
         userInfo.mg_state = !userInfo.mg_state;
@@ -318,9 +353,9 @@ export default {
     // 展示编辑用于的对话框
     async showEditDialog(id) {
       const { data: res } = await this.$http.get("users/" + id);
-      if (res.meta.status !== 200) {
-        return this.$message.error("查询用户数据失败~");
-      }
+      // if (res.meta.status !== 200) {
+      //   return this.$message.error("查询用户数据失败~");
+      // }
       this.editForm = res.data;
       console.log(res);
       this.editDialogVisble = true;
@@ -331,12 +366,13 @@ export default {
       this.$refs.editFormRef.resetFields();
     },
     editUserInfo() {
+      this.editDialogVisble = true;
       this.$refs.editFormRef.validate(async (valid) => {
         console.log(valid);
         if (!valid) return;
         // 发起修改用户信息的数据请求
         const { data: res } = await this.$http.put(
-          "users/" + this.editForm.id,
+          "users/" + this.editForm.user_id,
           {
             email: this.editForm.email,
             mobile: this.editForm.mobile,
@@ -382,10 +418,11 @@ export default {
     async setRoles(userInfo) {
       this.userInfo = userInfo;
       // 再展示对话框之前获取所有的角色列表
+      //TODO接口
       const { data: res } = await this.$http.get("roles");
-      if (res.meta.status !== 200) {
-        return this.$message.error("获取角色列表失败!");
-      }
+      // if (res.meta.status !== 200) {
+      //   return this.$message.error("获取角色列表失败!");
+      // }
       this.rolesList = res.data;
       this.setRolesDialogVisible = true;
     },
@@ -395,7 +432,7 @@ export default {
         return this.$message.error("请选择要分配的角色!");
       }
       const { data: res } = await this.$http.put(
-        `users/${this.userInfo.id}/role`,
+        `users/${this.userInfo.user_id}/role`,
         {
           rid: this.selectRoleId,
         }
@@ -420,7 +457,7 @@ export default {
 .el-table {
   margin-top: 25px;
 }
-.el-card{
+.el-card {
   box-shadow: 0 1px rgba(0, 0, 0, 0.15) !important;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="homepage" ref="homepage" style="overflow: hidden" id="homepage">
+  <div class="homepage" ref="homePage" style="overflow: hidden" id="homepage">
     <!-- 头部信息 -->
     <el-header>
       <div class="title">
@@ -8,7 +8,7 @@
           alt=""
           style="width: 45px; height: 45px"
         />
-        <span> &nbsp;教学资源管理平台 </span>
+        <span style="margin-left:5px"> 教学资源管理平台 </span>
       </div>
       <el-menu
         :default-active="home"
@@ -23,24 +23,28 @@
         :key="item.name"
         style="border:none;"
       >
-        <el-menu-item @click="goToAnchor('#'+ item.url)"
+        <el-menu-item @click="goToAnchor('#' + item.url)"
           ><a
             href="javascript:void(0);"
-            :class="active == '#'+ item.url ? 'active' : ''" 
-            >{{item.name}} </a
-          ></el-menu-item
+            :class="active == '#' + item.url ? 'active' : ''"
+            >{{ item.name }}
+          </a></el-menu-item
         >
-
       </el-menu>
       <!-- <el-button type="info" round @click="dialogFormVisible = true" plain size="small"
         >立即注册</el-button
       > -->
       <div class="loginButton">
-         <el-button type="primary" round @click="login" plain size="mini" class="llo"
-        ><i class="el-icon-user"> 登 录 / 注 册 </i>
-      </el-button>
+        <el-button
+          type="primary"
+          round
+          @click="login"
+          plain
+          size="mini"
+          class="llo"
+          ><i class="el-icon-user"> 登 录 / 注 册 </i>
+        </el-button>
       </div>
-     
     </el-header>
     <!-- 主体区域 -->
     <div class="mainpage">
@@ -53,19 +57,15 @@
         <!-- 欢迎div -->
         <div class="welcome" id="home">
           <img src="../assets/css/images/hello.svg" alt="" />
-          <p
-            type="text"
-            plain
-            class="welcomeText"
-          >
-            T e a c h i n g &#32; R e s o u r c e &nbsp; M a n a g e m e n t
-            &nbsp; P l a t f o r m
-            
+          <p type="text" plain class="welcomeText">
+            T e a c h i n g <span> ·</span> R e s o u r c e <span> ·</span> M a
+            n a g e m e n t <span> ·</span> P l a t f o r m
           </p>
           <el-button
             type="primary"
             @click="login"
             plain
+            class="wow pulse"
             style="
               text-align: center;
               position: absolute;
@@ -83,24 +83,31 @@
           src="../assets/css/images/mouse.svg"
           alt=""
           @click="goToAnchor('#sharing')"
-          class="underscore"
+          class="underscore wow bounceIn"
         />
         <!-- 功能介绍 -->
-          <div id="sharing" title="存储共享">
+        <div id="sharing" title="存储共享">
           <el-container class="lefttext">
             <h5>
-              <h1>存储共享<br /><small>文件实时同步,实现高效共享</small></h1>
-              <p>
+              <h1 class="wow slideInDown">
+                存储共享<br /><small>文件实时同步,实现高效共享</small>
+              </h1>
+              <p class="wow slideInUp">
                 无论是同步本地与云端文件，还是多人多端对同个文件<br />产生的修改版本，通过强大的文件同步能力，您和同事<br />都能及时看到一致的文件版本。
               </p>
             </h5>
-            <img src="../assets/css/images/sharing.png" alt="" />
+            <img
+              src="../assets/css/images/sharing.png"
+              class="wow bounceInRight"
+              alt=""
+            />
           </el-container>
           <el-image
+            class="wow slideInLeft"
             :src="require('../assets/css/images/permission.png')"
           ></el-image>
           <el-container class="righttext">
-            <h4>
+            <h4 class="wow slideInRight" data-wow-delay="0.3s">
               <small>精细权限设置</small><br />
               <p>
                 可以高效管理成员对文件的预览/编辑<br />/上传/下载/删除/分享等权限。
@@ -111,18 +118,25 @@
         <div id="search">
           <el-container class="lefttext">
             <h5>
-              <h1>文件查阅<br /><small>全文搜索功能</small></h1>
-              <p>
+              <h1 class="wow slideInDown">
+                文件查阅<br /><small>全文搜索功能</small>
+              </h1>
+              <p class="wow slideInUp">
                 您可以通过多种筛选条件缩小搜索范围，即使<br />忘记文件名，您也可以通过全文搜索功能在茫<br />茫文库中快速找到目标文件。
               </p>
             </h5>
-            <img src="../assets/css/images/searchbox.png" alt="" />
+            <img
+              src="../assets/css/images/search.png"
+              class="wow slideInUp"
+              alt=""
+            />
           </el-container>
           <el-image
+            class="wow slideInLeft"
             :src="require('../assets/css/images/survey.png')"
           ></el-image>
           <el-container class="righttext">
-            <h4>
+            <h4 class="wow slideInRight" data-wow-delay="0.3s">
               <small>在线预览多种文件格式</small><br />
               <p>
                 除了常规格式的文件，您还可以在线预览专业的<br />文件格式，涵盖工程/制造、设计、项目管理和教<br />培行业。
@@ -132,19 +146,24 @@
         </div>
         <div id="management">
           <el-container class="lefttext">
-            <h5>
+            <h5 class="wow slideInLeft">
               <h1>文件管理<br /><small>轻松管理相关文件</small></h1>
               <p>
                 自由管理与自己相关的本地文件、云端文件、共享文件。<br />修改、上传、删除、共享等多种操作，都能及时看到<br />一致的文件版本。
               </p>
             </h5>
-            <img src="../assets/css/images/management.png" alt="" />
+            <img
+              src="../assets/css/images/management.png"
+              class="wow bounceInRight"
+              alt=""
+            />
           </el-container>
           <el-image
+            class="wow slideInLeft"
             :src="require('../assets/css/images/library.png')"
           ></el-image>
           <el-container class="righttext">
-            <h4>
+            <h4 class="wow slideInRight" data-wow-delay="0.3s">
               <small>资源库文件管理</small><br />
               <p>
                 可以高效管理公共资源库的教学资源文件，对文件的<br />预览/编辑/上传/下载/删除/分享等权限。
@@ -155,19 +174,24 @@
         <div id="preview">
           <el-container class="lefttext">
             <h5>
-              <h1>数据可视化<br /><small>让数据更加直观生动</small></h1>
-              <p>
+              <h1 class="wow slideInDown">数据可视化<br /><small>让数据更加直观生动</small></h1>
+              <p class="wow slideInUp">
                 将平台数据用各种图标的形式表现，达到更加<br />直观高效的目的通过图形的长度、宽度、位置、<br />面积、角度、颜色等来展示数值
               </p>
             </h5>
-            <img src="../assets/css/images/video.png" alt="" />
+            <img
+              src="../assets/css/images/video.png"
+              class="wow slideInUp"
+              alt=""
+            />
           </el-container>
           <el-image
+            class="wow slideInLeft"
             :src="require('../assets/css/images/chart.png')"
             lazy
           ></el-image>
           <el-container class="righttext">
-            <h4>
+            <h4 class="wow slideInRight" data-wow-delay="0.3s">
               <small>图表多样化</small><br />
               <p>
                 利用饼图、折线图、直方图、柱状图等多种图表<br />将平台数据可视化更直观表现趋势、数量、数值<br />差异、多标准等关系
@@ -177,32 +201,34 @@
         </div>
         <div id="group" class="foot">
           <el-container class="lefttext">
-            <h5>
+            <h5 class="wow slideInDown">
               <h1>组群管理<br /><small>轻松管理相关组群</small></h1>
               <p>
                 组群成员管理、组群部门架构管理、组织管理；<br />成员统计、空间统计、文件统计；<br />相关成员查询操作日志
               </p>
             </h5>
-            <img src="../assets/css/images/groupimg.png" alt="" />
+            <img
+              src="../assets/css/images/group1.png"
+              class="wow bounceInRight"
+              alt=""
+            />
           </el-container>
         </div>
         <el-backtop class="backtop">UP</el-backtop>
         <!-- 底部区域 -->
         <div class="footer">
-          <span>立即使用，开启简单工作</span>
+          <span class="wow slideInDown">立即使用，开启简单工作</span>
           <br /><br />
           <el-button
             type="warning"
             plain
             size="mini"
-            class="register"
-            @click="loginReg()"
+            class="wow slideInUp"
+            style="background: #222324;"
+            @click="login()"
             >立即注册</el-button
           >
         </div>
-
-          
-
       </el-main>
     </div>
   </div>
@@ -210,13 +236,13 @@
 
 <script>
 //网站访问量统计
-var _hmt = _hmt || [];
-(function () {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?c06aacd8e1615fc1b57d838d1e946c23";
-  var s = document.getElementsByTagName("script")[0];
-  s.parentNode.insertBefore(hm, s);
-})();
+// var _hmt = _hmt || [];
+// (function() {
+//   var hm = document.createElement("script");
+//   hm.src = "https://hm.baidu.com/hm.js?c06aacd8e1615fc1b57d838d1e946c23";
+//   var s = document.getElementsByTagName("script")[0];
+//   s.parentNode.insertBefore(hm, s);
+// })();
 export default {
   data() {
     var validatePass = (rule, value, callback) => {
@@ -242,28 +268,28 @@ export default {
       list: [
         {
           name: "首页",
-          url: "home"
+          url: "home",
         },
         {
           name: "存储共享",
-          url: "sharing"
+          url: "sharing",
         },
         {
           name: "文件查阅",
-          url: "search"
+          url: "search",
         },
 
         {
           name: "文件管理",
-          url: "management"
+          url: "management",
         },
         {
           name: "数据可视化",
-          url: "preview"
+          url: "preview",
         },
         {
           name: "组群管理",
-          url: "group"
+          url: "group",
         },
       ],
 
@@ -292,58 +318,56 @@ export default {
     };
   },
   mounted() {
+    new this.$wow.WOW().init();
     //一次性计算赋值，减少滚动计算节点位置次数
     this.distance_team = document.querySelector("#sharing").offsetTop - 70;
     this.distance_contact = document.querySelector("#search").offsetTop - 70;
     this.distance_join = document.querySelector("#management").offsetTop - 60;
     this.distance_preview = document.querySelector("#preview").offsetTop - 60;
     this.distance_group = document.querySelector("#group").offsetTop - 60;
-    this.$nextTick(function () {
+    this.$nextTick(function() {
       document
         .querySelector("#homepage")
         .addEventListener("scroll", this.onScroll);
     });
     window.addEventListener("scroll", this.onScroll, true);
   },
+  beforeDestroy () {
+    window.removeEventListener('scroll', this.onScroll)
+  },
   methods: {
     login() {
-      window.sessionStorage.clear();
       this.$router.push("/loginReg");
     },
     // register() {
     //   this.$router.push("/login")
     //   alert("注册成功!");
     // },
-    register(formName) {
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          this.$message({
-            type: "success",
-            message: "注册成功",
-          });
-          this.$router.push("/login");
-        } else {
-          console.log("error submit!!");
-          return false;
-        }
-      });
-    },
+    // register(formName) {
+    //   this.$refs[formName].validate((valid) => {
+    //     if (valid) {
+    //       this.$message({
+    //         type: "success",
+    //         message: "注册成功",
+    //       });
+    //       this.$router.push("/login");
+    //     } else {
+    //       console.log("error submit!!");
+    //       return false;
+    //     }
+    //   });
+    // },
     resetForm(formName) {
       this.$refs[formName].resetFields();
     },
-    // gotoregister() {
-    //   this.$router.push("/register");
-    // },
     goToAnchor(target) {
       this.active = target;
       const toElement = document.querySelector(target);
       toElement.scrollIntoView(this.scrollIntoViewOptions);
-      // var page = document.getElementById("homepage")
-      // page.className = "mainpage_blur"
     },
     //TODO循环报错
     onScroll() {
-      let scrolled = Math.abs(this.$refs.homepage.getBoundingClientRect().top);
+      let scrolled = Math.abs(this.$refs.homePage.getBoundingClientRect().top);
       if (scrolled < this.distance_team) {
         this.active = "#home";
       } else if (
@@ -381,7 +405,7 @@ export default {
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 120% 120%; //放大背景，去除模糊处理导致的白边
   z-index: 1;
 }
 .el-header {
@@ -422,8 +446,8 @@ export default {
   align-items: center;
   width: 600px;
 }
-.loginButton{
-  width:430px;
+.loginButton {
+  width: 430px;
   text-align: right;
 }
 .el-main {
@@ -441,8 +465,9 @@ export default {
     height: 100px;
     float: left;
     font-size: 45px;
-    color: #122E29;
-    margin-top: 55px;
+    color: #122e29;
+    margin-top: 60px;
+    margin-bottom: 25px;
   }
   h5 {
     font-weight: normal;
@@ -453,7 +478,7 @@ export default {
   }
   small {
     font-size: 22px;
-    color: #00595F;
+    color: #00595f;
   }
   img {
     float: right;
@@ -465,7 +490,7 @@ export default {
     font-size: 18px;
     text-align: left;
     font-weight: normal;
-    margin-top: 10%;
+    margin-top: 1%;
   }
   b {
     float: right;
@@ -483,7 +508,6 @@ export default {
   border: none !important;
   height: 45px !important;
   vertical-align: middle;
-
 }
 .lefttext {
   float: left;
@@ -534,13 +558,14 @@ export default {
   font-style: italic !important;
   color: rgb(14, 48, 45) !important;
   background-clip: text;
+  margin-top: 10% !important;
   margin-bottom: 250% !important;
   text-align: center;
-              position: absolute;
-              top: 35%;
-              left: 25%;
-              font-size: 32px !important;
-              letter-spacing:2px;
+  position: absolute;
+  top: 35%;
+  left: 22%;
+  font-size: 32px !important;
+  letter-spacing: 2px;
 }
 .footer {
   width: 100vw !important;

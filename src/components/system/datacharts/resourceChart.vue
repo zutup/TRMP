@@ -1,7 +1,7 @@
 <template>
   <div class="com-container">
     <!-- <el-card id="my" ref="sellerRef"> -->
-      <br>
+    <br />
     <h1>▎资源点击量统计</h1>
     <div id="main" ref="sellerRef" style="height: 730px"></div>
     <!-- </el-card> -->
@@ -13,7 +13,68 @@ export default {
   data() {
     return {
       myChart: null,
-      allData: null, //服务器返回数据
+      allData: [
+        {
+          name: "期末成绩单.xslx",
+          value: 99,
+        },
+        {
+          name: "职位名单.doc",
+          value: 102,
+        },
+        {
+          name: "期末试题.pptx",
+          value: 83,
+        },
+        {
+          name: "教学书籍.txt",
+          value: 49,
+        },
+        {
+          name: "题库.zip",
+          value: 200,
+        },
+        {
+          name: "教学课程表.xslx",
+          value: 152,
+        },
+        {
+          name: "Resource_Systems.pdf",
+          value: 76,
+        },
+        {
+          name: "毕业设计开题报告.doc",
+          value: 23,
+        },
+        {
+          name: "毕业实习报告.pdf",
+          value: 87,
+        },
+        {
+          name: "compressed_tracemonkey.pdf",
+          value: 223,
+        },
+        {
+          name: "课程表.png",
+          value: 145,
+        },
+        {
+          name: "校标.jpg",
+          value: 187,
+        },
+        {
+          name: "计科教学计划.docx",
+          value: 127,
+        },
+        {
+          name: "信安教学计划.docx",
+          value: 57,
+        },
+        {
+          name: "软工教学计划.docx",
+          value: 99,
+        },
+      ], //服务器返回数据
       currentPage: 1,
       totalPage: 0,
       timerId: null, //定时器标识
@@ -27,7 +88,7 @@ export default {
     // }, 1000);
     window.addEventListener("resize", this.screenAdapter);
     //页面加载完主动适配
-    this.screenAdapter()
+    this.screenAdapter();
   },
   methods: {
     initChart() {
@@ -69,6 +130,28 @@ export default {
         series: [
           {
             type: "bar",
+            data: [
+              {
+                name: "课程表.png",
+                value: 145,
+              },
+              {
+                name: "校标.jpg",
+                value: 187,
+              },
+              {
+                name: "计科教学计划.docx",
+                value: 127,
+              },
+              {
+                name: "信安教学计划.docx",
+                value: 57,
+              },
+              {
+                name: "软工教学计划.docx",
+                value: 99,
+              },
+            ],
             label: {
               show: true,
               position: "right",
@@ -93,7 +176,7 @@ export default {
       };
       this.myChart.setOption(initOption);
       //图表鼠标监听事件
-      this.myChart.on("mousein", () => { 
+      this.myChart.on("mousein", () => {
         clearInterval(this.timerId);
       });
       this.myChart.on("mouseout", () => {

@@ -36,7 +36,7 @@
         >
           <el-progress
             type="circle"
-            :percentage="15"
+            :percentage="30"
             :format="format1"
           ></el-progress>
         </el-tooltip>
@@ -67,10 +67,12 @@ export default {
       this.$router.push("/system");
     },
     gohome() {
+      //清空token
+      window.sessionStorage.clear();
       this.$router.push("/home");
     },
     format1(num) {
-      num = 1; //后台数据
+      num = 3; //后台数据
       return `已用` + num + "个";
     },
     format2(storage) {

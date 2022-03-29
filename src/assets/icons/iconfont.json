@@ -6,6 +6,34 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "6380963",
+      "name": "教工管理",
+      "font_class": "jiaogongguanli",
+      "unicode": "e62a",
+      "unicode_decimal": 58922
+    },
+    {
+      "icon_id": "16543261",
+      "name": "加题面板_题目",
+      "font_class": "jiatimianban_timu",
+      "unicode": "e656",
+      "unicode_decimal": 58966
+    },
+    {
+      "icon_id": "2966209",
+      "name": "下拉",
+      "font_class": "xiala",
+      "unicode": "e617",
+      "unicode_decimal": 58903
+    },
+    {
+      "icon_id": "10588411",
+      "name": "下拉",
+      "font_class": "xiala1",
+      "unicode": "e648",
+      "unicode_decimal": 58952
+    },
+    {
       "icon_id": "883999",
       "name": "资源",
       "font_class": "ziyuan",
@@ -25,6 +53,20 @@
       "font_class": "yuncunchu",
       "unicode": "e61c",
       "unicode_decimal": 58908
+    },
+    {
+      "icon_id": "10949395",
+      "name": "左",
+      "font_class": "zuo",
+      "unicode": "e620",
+      "unicode_decimal": 58912
+    },
+    {
+      "icon_id": "10949403",
+      "name": "右",
+      "font_class": "you",
+      "unicode": "e621",
+      "unicode_decimal": 58913
     }
   ]
 }
